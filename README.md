@@ -7,15 +7,8 @@
 
 ## 🚀 Overview
 
----
-
-## 🚀 Overview
-
 A lightweight, offline chronograph companion for airgun shooters.
 
----
-
-## 🚀 Overview
 ChronoMate 2026 is designed to be the fastest, simplest, and most enjoyable chronograph companion for airgun shooters. It runs entirely from a **single HTML file**, ensuring total portability and privacy.
 
 * ✅ **No installation required**
