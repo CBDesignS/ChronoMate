@@ -1,8 +1,11 @@
-<p align="center">
+<div align="center">
   <img src="https://github.com/CBDesignS/ChronoMate/blob/v0.1.0/CM_logo.png?raw=true" alt="ChronoMate 2026 Logo" width="600">
-  <br>
   <h1>⏱️ ChronoMate 2026</h1>
-</p>
+</div>
+
+---
+
+## 🚀 Overview
 
 ---
 
