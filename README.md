@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="CM_logo.png" alt="ChronoMate 2026 Logo" width="600">
+</p>
+
+
 ChronoMate 2026
 
 A lightweight offline chronograph companion for airgun shooters.
