@@ -47,3 +47,4 @@ No tracking
 No analytics
 No internet required
 
+ChronoMate exists to be the fastest, simplest and most enjoyable chronograph companion for airgun shooters. No adverts. No accounts. No subscriptions. Just open it and start shooting.
