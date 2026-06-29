@@ -46,23 +46,4 @@ No adverts
 No tracking
 No analytics
 No internet required
-Folder Structure
 
-Initially...
-
-ChronoMate/
-
-│
-├── index.html
-├── LICENSE
-├── README.md
-├── CHANGELOG.md
-└── screenshots/
-
-That's it.
-
-No npm.
-
-No build system.
-
-No node_modules the size of a small planet. 😂
