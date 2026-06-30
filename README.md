@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/CBDesignS/ChronoMate/blob/v0.1.0/CM_logo.png?raw=true" alt="ChronoMate 2026 Logo" width="600">
+  <img src="https://github.com/CBDesignS/ChronoMate/assets/logo.png?raw=true" alt="ChronoMate 2026 Logo" width="600">
   <h1>⏱️ ChronoMate 2026</h1>
 </div>
 
