@@ -1,1 +1,311 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChronoMate 2026</title><style>:root{--bg:#111827;--card:#1f2937;--text:#eee;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;--accent:#3b82f6}body{font-family:system-ui;background:var(--bg);color:var(--text);margin:0}.wrap{max-width:960px;margin:auto;padding:20px}.card{background:var(--card);padding:16px;border-radius:12px;margin:12px 0}input,select,button{width:100%;padding:10px;margin:6px 0;background:#0f172a;color:#fff;border:1px solid #444;border-radius:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.bar{height:18px;background:#333;border-radius:9px}.fill{height:18px;width:0;background:var(--good)}table{width:100%;border-collapse:collapse}th,td{border:1px solid #444;padding:6px;text-align:center}</style></head><body><div class="wrap"><h1>🎯 ChronoMate 2026 <small>v0.1.0 Foundation</small></h1><div class="grid"><div class="card"><select id="mode"><option value="12">Sub-12</option><option value="999">FAC</option></select><select id="units"><option value="fps">FPS</option><option value="ms">m/s</option></select><select id="pellet"><option value="8.44">JSB Exact 8.44gr</option><option value="8.64">H&N FTT 8.64gr</option><option value="10.34">JSB Heavy 10.34gr</option><option value="custom">Custom...</option></select><input id="weight" type="number" value="8.44" step="0.01"><input id="vel" type="number" placeholder="Velocity"><button onclick="addShot()">Add Shot</button></div><div class="card"><div id="out">0.00 ft-lb</div><div id="j">0.00 J</div><div id="status">Ready</div><div class="bar"><div id="fill" class="fill"></div></div></div></div><div class="card"><table><thead><tr><th>#</th><th>FPS</th><th>ft-lb</th></tr></thead><tbody id="shots"></tbody></table></div><div class="card"><div id="stats">No shots.</div></div><footer>Created by Chris Bruce (CBDesignS) • ChatGPT (OpenAI GPT-5.5)</footer></div><script>const data=[];pellet.onchange=()=>{if(pellet.value!=="custom")weight.value=pellet.value;calc()};[mode,units,weight,vel].forEach(e=>e.oninput=calc);function calc(){let g=+weight.value||0,v=+vel.value||0,fps=units.value==="fps"?v:v*3.28084,ft=g*fps*fps/450240,jl=ft*1.35582;out.textContent=ft.toFixed(2)+" ft-lb";j.textContent=jl.toFixed(2)+" J";let lim=+mode.value,p=Math.min(ft/(lim==999?40:lim)*100,100);fill.style.width=p+"%";if(lim==999){status.textContent="FAC";fill.style.background="var(--accent)"}else if(ft<11.5){status.textContent="SAFE";fill.style.background="var(--good)"}else if(ft<12){status.textContent="CAUTION";fill.style.background="var(--warn)"}else{status.textContent="OVER LIMIT";fill.style.background="var(--bad)"}return{fps,ft}}function addShot(){let r=calc();if(r.fps<=0)return;data.push(r);shots.innerHTML+=`<tr><td>${data.length}</td><td>${r.fps.toFixed(1)}</td><td>${r.ft.toFixed(2)}</td></tr>`;stats.textContent=`Shots: ${data.length}`;}calc();</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChronoMate 2026</title>
+
+    <meta name="description" content="Lightweight Air Rifle Chronograph Recording Tool">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <header class="card">
+
+        <h1>🎯 ChronoMate 2026</h1>
+
+        <p class="subtext">
+            Lightweight Air Rifle Chronograph Recording Tool
+        </p>
+
+    </header>
+
+
+    <div class="grid">
+
+        <!-- Calculator -->
+
+        <section class="card">
+
+            <h2>Ammo Selection</h2>
+
+            <label for="calibre">
+                Calibre
+            </label>
+
+            <select id="calibre">
+
+                <option value=".177">.177</option>
+
+                <option value=".22">.22</option>
+
+            </select>
+
+
+            <label for="manufacturer">
+                Manufacturer
+            </label>
+
+            <select id="manufacturer"></select>
+
+
+            <label for="ammo">
+                Ammo
+            </label>
+
+            <select id="ammo"></select>
+
+
+            <label>
+                Weight
+            </label>
+
+            <div class="subtext">
+
+                <span id="weightGrains">0.00</span> grains
+
+                <br>
+
+                <span id="weightGrams">0.000</span> grams
+
+            </div>
+
+
+            <label for="customWeight">
+
+                Custom Weight (optional)
+
+            </label>
+
+            <input
+                id="customWeight"
+                type="number"
+                step="0.01"
+                placeholder="Leave blank to use selected ammo">
+
+
+            <label for="velocityUnits">
+
+                Velocity Units
+
+            </label>
+
+            <select id="velocityUnits">
+
+                <option value="fps">
+                    FPS
+                </option>
+
+                <option value="mps">
+                    m/s
+                </option>
+
+            </select>
+
+
+            <label for="velocity">
+
+                Velocity
+
+            </label>
+
+            <input
+                id="velocity"
+                type="number"
+                step="0.1"
+                placeholder="Enter velocity">
+
+
+            <label for="powerMode">
+
+                Rifle Type
+
+            </label>
+
+            <select id="powerMode">
+
+                <option value="12">
+                    Sub-12 ft-lb
+                </option>
+
+                <option value="999">
+                    FAC
+                </option>
+
+            </select>
+
+
+            <button id="btnAddShot">
+
+                Add Shot
+
+            </button>
+
+        </section>
+
+
+
+        <!-- Results -->
+
+        <section class="card results">
+
+            <h2>Results</h2>
+
+            <div class="energy">
+
+                <span id="energyFTLB">
+
+                    0.00
+
+                </span>
+
+                ft-lb
+
+            </div>
+
+
+            <div>
+
+                <strong>
+
+                    <span id="energyJoules">
+
+                        0.00
+
+                    </span>
+
+                    Joules
+
+                </strong>
+
+            </div>
+
+            <br>
+
+            <div>
+
+                <span id="velocityFPS">
+
+                    0
+
+                </span>
+
+                FPS
+
+                /
+
+                <span id="velocityMPS">
+
+                    0
+
+                </span>
+
+                m/s
+
+            </div>
+
+
+            <div
+                id="powerStatus"
+                class="status safe">
+
+                READY
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="powerBar"
+                    class="progress-fill">
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- Shot String -->
+
+    <section class="card">
+
+        <h2>Shot String</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Velocity</th>
+
+                <th>ft-lb</th>
+
+                <th>Joules</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="shotTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+    <!-- Statistics -->
+
+    <section class="card">
+
+        <h2>Statistics</h2>
+
+        <div id="statistics">
+
+            No shots recorded.
+
+        </div>
+
+    </section>
+
+
+
+    <footer>
+
+        Version 0.2.0
+
+        <br><br>
+
+        Chris Bruce (CBDesignS)
+
+        <br>
+
+        Developed with ChatGPT (OpenAI GPT-5.5)
+
+    </footer>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
