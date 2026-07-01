@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChronoMate 2026</title>
+
+    <meta name="description" content="Lightweight Air Rifle Chronograph Recording Tool">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <header class="card">
+
+        <h1>🎯 ChronoMate 2026</h1>
+
+        <p class="subtext">
+            Lightweight Air Rifle Chronograph Recording Tool
+        </p>
+
+    </header>
+
+
+    <div class="grid">
+
+        <!-- Calculator -->
+
+        <section class="card">
+
+            <h2>Ammo Selection</h2>
+
+            <label for="calibre">
+                Calibre
+            </label>
+
+            <select id="calibre">
+
+                <option value=".177">.177</option>
+
+                <option value=".22">.22</option>
+
+            </select>
+
+
+            <label for="manufacturer">
+                Manufacturer
+            </label>
+
+            <select id="manufacturer"></select>
+
+
+            <label for="ammo">
+                Ammo
+            </label>
+
+            <select id="ammo"></select>
+
+
+            <label>
+                Weight
+            </label>
+
+            <div class="subtext">
+
+                <span id="weightGrains">0.00</span> grains
+
+                <br>
+
+                <span id="weightGrams">0.000</span> grams
+
+            </div>
+
+
+            <label for="customWeight">
+
+                Custom Weight (optional)
+
+            </label>
+
+            <input
+                id="customWeight"
+                type="number"
+                step="0.01"
+                placeholder="Leave blank to use selected ammo">
+
+
+            <label for="velocityUnits">
+
+                Velocity Units
+
+            </label>
+
+            <select id="velocityUnits">
+
+                <option value="fps">
+                    FPS
+                </option>
+
+                <option value="mps">
+                    m/s
+                </option>
+
+            </select>
+
+
+            <label for="velocity">
+
+                Velocity
+
+            </label>
+
+            <input
+                id="velocity"
+                type="number"
+                step="0.1"
+                placeholder="Enter velocity">
+
+
+            <label for="powerMode">
+
+                Rifle Type
+
+            </label>
+
+            <select id="powerMode">
+
+                <option value="12">
+                    Sub-12 ft-lb
+                </option>
+
+                <option value="999">
+                    FAC
+                </option>
+
+            </select>
+
+
+            <button id="btnAddShot">
+
+                Add Shot
+
+            </button>
+
+        </section>
+
+
+
+        <!-- Results -->
+
+        <section class="card results">
+
+            <h2>Results</h2>
+
+            <div class="energy">
+
+                <span id="energyFTLB">
+
+                    0.00
+
+                </span>
+
+                ft-lb
+
+            </div>
+
+
+            <div>
+
+                <strong>
+
+                    <span id="energyJoules">
+
+                        0.00
+
+                    </span>
+
+                    Joules
+
+                </strong>
+
+            </div>
+
+            <br>
+
+            <div>
+
+                <span id="velocityFPS">
+
+                    0
+
+                </span>
+
+                FPS
+
+                /
+
+                <span id="velocityMPS">
+
+                    0
+
+                </span>
+
+                m/s
+
+            </div>
+
+
+            <div
+                id="powerStatus"
+                class="status safe">
+
+                READY
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="powerBar"
+                    class="progress-fill">
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- Shot String -->
+
+    <section class="card">
+
+        <h2>Shot String</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Velocity</th>
+
+                <th>ft-lb</th>
+
+                <th>Joules</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="shotTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+    <!-- Statistics -->
+
+    <section class="card">
+
+        <h2>Statistics</h2>
+
+        <div id="statistics">
+
+            No shots recorded.
+
+        </div>
+
+    </section>
+
+
+
+    <footer>
+
+        Version 0.2.0
+
+        <br><br>
+
+        Chris Bruce (CBDesignS)
+
+        <br>
+
+        Developed with ChatGPT (OpenAI GPT-5.5)
+
+    </footer>
+
+</div>
+
+<script src="data/ammo.js"></script>
+<script src="app.js"></script>
+
+</body>
+
+</html>
