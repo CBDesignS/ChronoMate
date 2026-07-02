@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.2.0
+ Version : v0.4.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -499,3 +499,96 @@ const savedTheme =
 setTheme(
     savedTheme ?? "dark"
 );
+//============================================================
+// Report Data Helpers
+//============================================================
+
+function getSelectedAmmoForReport()
+{
+    const manufacturer =
+        manufacturerSelect.value;
+
+    const ammoList =
+        ammoDatabase.filter(item =>
+            item.manufacturer === manufacturer
+        );
+
+    const selectedAmmo =
+        ammoList[ammoSelect.selectedIndex];
+
+    if (!selectedAmmo)
+        return null;
+
+    return {
+        calibre : calibreSelect.value,
+        manufacturer : selectedAmmo.manufacturer,
+        name : selectedAmmo.name,
+        grains : selectedAmmo.grains,
+        grams : grainsToGrams(selectedAmmo.grains)
+    };
+}
+
+
+function getStatisticsForReport()
+{
+    if (shotHistory.length === 0)
+    {
+        return {
+            shotCount : 0
+        };
+    }
+
+    const fpsValues =
+        shotHistory.map(shot => shot.fps);
+
+    const energyValues =
+        shotHistory.map(shot => shot.ftlb);
+
+    const highestFPS =
+        Math.max(...fpsValues);
+
+    const lowestFPS =
+        Math.min(...fpsValues);
+
+    const averageFPS =
+        fpsValues.reduce((a, b) => a + b, 0)
+        / fpsValues.length;
+
+    const highestFTLB =
+        Math.max(...energyValues);
+
+    const lowestFTLB =
+        Math.min(...energyValues);
+
+    const averageFTLB =
+        energyValues.reduce((a, b) => a + b, 0)
+        / energyValues.length;
+
+    return {
+        shotCount : shotHistory.length,
+        averageFPS : averageFPS,
+        highestFPS : highestFPS,
+        lowestFPS : lowestFPS,
+        extremeSpreadFPS : highestFPS - lowestFPS,
+        averageFTLB : averageFTLB,
+        highestFTLB : highestFTLB,
+        lowestFTLB : lowestFTLB,
+        selectedLimit : powerMode.value === "999" ? "FAC" : "Sub-12 ft-lb",
+        result :
+            powerMode.value === "999"
+                ? "FAC MODE"
+                : highestFTLB < 12
+                    ? "PASS"
+                    : "OVER SELECTED LIMIT"
+    };
+}
+
+
+function getChronoMateReport()
+{
+    return buildReportSnapshot(
+        getSelectedAmmoForReport(),
+        structuredClone(shotHistory),
+        getStatisticsForReport()
+    );
+}
