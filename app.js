@@ -447,3 +447,55 @@ addShotButton.addEventListener(
 );
 
 loadAmmoDatabase();
+//============================================================
+// Theme Support
+//============================================================
+
+const themeButton =
+    document.getElementById("themeToggle");
+
+
+function setTheme(theme)
+{
+    if(theme==="dark")
+    {
+        document.body.classList.add("dark");
+
+        themeButton.textContent="🌙 Dark";
+    }
+    else
+    {
+        document.body.classList.remove("dark");
+
+        themeButton.textContent="☀ Light";
+    }
+
+    localStorage.setItem(
+        "chronomate-theme",
+        theme
+    );
+}
+
+
+themeButton.addEventListener(
+    "click",
+    () =>
+    {
+        const dark =
+            document.body.classList.contains("dark");
+
+        setTheme(
+            dark ? "light" : "dark"
+        );
+    }
+);
+
+
+const savedTheme =
+    localStorage.getItem(
+        "chronomate-theme"
+    );
+
+setTheme(
+    savedTheme ?? "dark"
+);
