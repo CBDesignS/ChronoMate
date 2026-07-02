@@ -317,3 +317,19 @@ footer{
         font-size:2.5rem;
     }
 }
+.button-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px;
+}
+
+.button-row button{
+    margin-top:0;
+}
+
+@media(max-width:600px){
+    .button-row{
+        grid-template-columns:1fr;
+    }
+}
