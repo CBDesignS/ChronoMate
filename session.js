@@ -115,7 +115,76 @@ function resetSession()
     };
 
     createSessionTimestamp();
+//============================================================
+// Save Session
+//============================================================
 
+function saveSession()
+{
+
+    localStorage.setItem(
+
+        STORAGE_KEYS.SESSION,
+
+        JSON.stringify(
+            chronoSession
+        )
+
+    );
+
+}
+
+
+//============================================================
+// Load Session
+//============================================================
+
+function loadSession()
+{
+
+    const storedSession =
+
+        localStorage.getItem(
+            STORAGE_KEYS.SESSION
+        );
+
+    if(storedSession)
+    {
+
+        chronoSession =
+
+            JSON.parse(
+                storedSession
+            );
+
+    }
+    else
+    {
+
+        createSessionTimestamp();
+
+        saveSession();
+
+    }
+
+}
+
+
+//============================================================
+// Get Current Session
+//============================================================
+
+function getSession()
+{
+
+    return chronoSession;
+
+}
     saveSession();
 
 }
+//============================================================
+// Initialise Session
+//============================================================
+
+loadSession();
