@@ -114,6 +114,69 @@
 </header>
 
 
+<!-- ==========================================================
+     Session Information
+=========================================================== -->
+
+<section class="card">
+
+    <h2>Session Information</h2>
+
+    <label for="testerName">Tester Name</label>
+    <input
+        id="testerName"
+        type="text"
+        placeholder="e.g. Chris Bruce">
+
+    <label for="chronographName">Chronograph</label>
+    <input
+        id="chronographName"
+        type="text"
+        placeholder="e.g. HT-X3006">
+
+    <label for="sessionNotes">Session Notes</label>
+    <input
+        id="sessionNotes"
+        type="text"
+        placeholder="Optional notes">
+
+</section>
+
+
+<!-- ==========================================================
+     Rifle Information
+=========================================================== -->
+
+<section class="card">
+
+    <h2>Rifle Information</h2>
+
+    <label for="rifleManufacturer">Manufacturer</label>
+    <input
+        id="rifleManufacturer"
+        type="text"
+        placeholder="e.g. BSA">
+
+    <label for="rifleModel">Model</label>
+    <input
+        id="rifleModel"
+        type="text"
+        placeholder="e.g. Ultra MMC">
+
+    <label for="rifleSerial">Serial Number</label>
+    <input
+        id="rifleSerial"
+        type="text"
+        placeholder="Optional">
+
+    <label for="rifleConfiguration">Configuration</label>
+    <input
+        id="rifleConfiguration"
+        type="text"
+        placeholder="e.g. Unregulated / Regulated / New seals">
+
+</section>
+
 
 <!-- ==========================================================
      Main Content
@@ -233,12 +296,11 @@
             </select>
 
 
-            <button id="btnAddShot">
-
-                Add Shot
-
-            </button>
-
+            <div class="button-row">
+                <button id="btnAddShot">Add Shot</button>
+                <button id="btnGenerateReport">Generate Report</button>
+            </div>
+            
         </section>
 
 
@@ -328,7 +390,9 @@
 
 
 
-    <!-- Shot String -->
+    <!-- ==========================================================
+         Shot String
+    ========================================================== -->
 
     <section class="card">
 
@@ -338,17 +402,14 @@
 
             <thead>
 
-            <tr>
+                <tr>
 
-                <th>#</th>
+                    <th>#</th>
+                    <th>Velocity</th>
+                    <th>ft-lb</th>
+                    <th>Joules</th>
 
-                <th>Velocity</th>
-
-                <th>ft-lb</th>
-
-                <th>Joules</th>
-
-            </tr>
+                </tr>
 
             </thead>
 
@@ -358,9 +419,19 @@
 
         </table>
 
+        <div class="shot-actions">
+
+            <button
+                id="btnClearShots"
+                class="secondary-button">
+
+                Clear Shot String
+
+            </button>
+
+        </div>
+
     </section>
-
-
 
     <!-- Statistics -->
 
@@ -380,7 +451,7 @@
 
     <footer>
 
-        Version 0.3.0
+        Version 0.4.0
 
         <br><br>
 
@@ -395,6 +466,7 @@
 </div>
 
 <script src="data/ammo.js"></script>
+<script src="session.js"></script>
 <script src="app.js"></script>
 
 </body>

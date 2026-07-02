@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.2.0
+ Version : v0.4.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -499,3 +499,182 @@ const savedTheme =
 setTheme(
     savedTheme ?? "dark"
 );
+//============================================================
+// Report Data Helpers
+//============================================================
+
+function getSelectedAmmoForReport()
+{
+    const manufacturer =
+        manufacturerSelect.value;
+
+    const ammoList =
+        ammoDatabase.filter(item =>
+            item.manufacturer === manufacturer
+        );
+
+    const selectedAmmo =
+        ammoList[ammoSelect.selectedIndex];
+
+    if (!selectedAmmo)
+        return null;
+
+    return {
+        calibre : calibreSelect.value,
+        manufacturer : selectedAmmo.manufacturer,
+        name : selectedAmmo.name,
+        grains : selectedAmmo.grains,
+        grams : grainsToGrams(selectedAmmo.grains)
+    };
+}
+
+
+function getStatisticsForReport()
+{
+    if (shotHistory.length === 0)
+    {
+        return {
+            shotCount : 0
+        };
+    }
+
+    const fpsValues =
+        shotHistory.map(shot => shot.fps);
+
+    const energyValues =
+        shotHistory.map(shot => shot.ftlb);
+
+    const highestFPS =
+        Math.max(...fpsValues);
+
+    const lowestFPS =
+        Math.min(...fpsValues);
+
+    const averageFPS =
+        fpsValues.reduce((a, b) => a + b, 0)
+        / fpsValues.length;
+
+    const highestFTLB =
+        Math.max(...energyValues);
+
+    const lowestFTLB =
+        Math.min(...energyValues);
+
+    const averageFTLB =
+        energyValues.reduce((a, b) => a + b, 0)
+        / energyValues.length;
+
+    return {
+        shotCount : shotHistory.length,
+        averageFPS : averageFPS,
+        highestFPS : highestFPS,
+        lowestFPS : lowestFPS,
+        extremeSpreadFPS : highestFPS - lowestFPS,
+        averageFTLB : averageFTLB,
+        highestFTLB : highestFTLB,
+        lowestFTLB : lowestFTLB,
+        selectedLimit : powerMode.value === "999" ? "FAC" : "Sub-12 ft-lb",
+        result :
+            powerMode.value === "999"
+                ? "FAC MODE"
+                : highestFTLB < 12
+                    ? "PASS"
+                    : "OVER SELECTED LIMIT"
+    };
+}
+
+
+function getChronoMateReport()
+{
+    return buildReportSnapshot(
+        getSelectedAmmoForReport(),
+        structuredClone(shotHistory),
+        getStatisticsForReport()
+    );
+}
+//============================================================
+// Generate Report Preview
+//============================================================
+
+const generateReportButton =
+    document.getElementById("btnGenerateReport");
+
+function generateReportPreview()
+{
+    const report =
+        getChronoMateReport();
+
+    console.log(report);
+
+    alert(
+        "Report snapshot generated.\n\n" +
+        "Tester: " + (report.session.tester || "Not entered") + "\n" +
+        "Rifle: " +
+        (report.session.rifle.manufacturer || "") + " " +
+        (report.session.rifle.model || "") + "\n" +
+        "Shots: " + report.statistics.shotCount + "\n" +
+        "Result: " + report.statistics.result
+    );
+}
+
+if(generateReportButton)
+{
+    generateReportButton.addEventListener(
+        "click",
+        generateReportPreview
+    );
+}
+//============================================================
+// Clear Shot String
+//============================================================
+
+const clearShotsButton =
+    document.getElementById("btnClearShots");
+
+
+if(clearShotsButton)
+{
+
+    clearShotsButton.addEventListener(
+
+        "click",
+
+        clearShotHistory
+
+    );
+
+}
+
+
+function clearShotHistory()
+{
+    if(shotHistory.length===0)
+    {
+        alert("There are no shots to clear.");
+        return;
+    }
+
+    const confirmed = confirm(
+        "Clear the current shot string?\n\nAll recorded shots for this session will be removed."
+    );
+
+    if(!confirmed)
+        return;
+
+    shotHistory = [];
+
+    shotTable.innerHTML = "";
+
+    statistics.textContent =
+        "No shots recorded.";
+
+    energyFTLB.textContent = "0.00";
+    energyJoules.textContent = "0.00";
+    velocityFPS.textContent = "0";
+    velocityMPS.textContent = "0";
+
+    powerStatus.textContent = "READY";
+    powerStatus.className = "status safe";
+
+    powerBar.style.width = "0%";
+}
