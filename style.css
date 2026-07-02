@@ -334,11 +334,23 @@ footer{
     }
 }
 .secondary-button{
+
+    width:auto;
+
+    min-width:200px;
+
+    float:right;
+
     margin-top:16px;
-    background:#4b5563;
+
+    background:#d97706;
+
     color:white;
+
 }
 
 .secondary-button:hover{
-    background:#374151;
+
+    background:#b45309;
+
 }
