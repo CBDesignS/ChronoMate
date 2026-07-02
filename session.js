@@ -188,3 +188,53 @@ function getSession()
 //============================================================
 
 loadSession();
+//============================================================
+// Session Form Binding
+//============================================================
+
+const sessionFields = {
+    tester: document.getElementById("testerName"),
+    chronograph: document.getElementById("chronographName"),
+    notes: document.getElementById("sessionNotes"),
+
+    rifleManufacturer: document.getElementById("rifleManufacturer"),
+    rifleModel: document.getElementById("rifleModel"),
+    rifleSerial: document.getElementById("rifleSerial"),
+    rifleConfiguration: document.getElementById("rifleConfiguration")
+};
+
+
+function loadSessionIntoForm()
+{
+    sessionFields.tester.value = chronoSession.tester || "";
+    sessionFields.chronograph.value = chronoSession.chronograph || "";
+    sessionFields.notes.value = chronoSession.notes || "";
+
+    sessionFields.rifleManufacturer.value = chronoSession.rifle.manufacturer || "";
+    sessionFields.rifleModel.value = chronoSession.rifle.model || "";
+    sessionFields.rifleSerial.value = chronoSession.rifle.serial || "";
+    sessionFields.rifleConfiguration.value = chronoSession.rifle.configuration || "";
+}
+
+
+function saveFormToSession()
+{
+    chronoSession.tester = sessionFields.tester.value.trim();
+    chronoSession.chronograph = sessionFields.chronograph.value.trim();
+    chronoSession.notes = sessionFields.notes.value.trim();
+
+    chronoSession.rifle.manufacturer = sessionFields.rifleManufacturer.value.trim();
+    chronoSession.rifle.model = sessionFields.rifleModel.value.trim();
+    chronoSession.rifle.serial = sessionFields.rifleSerial.value.trim();
+    chronoSession.rifle.configuration = sessionFields.rifleConfiguration.value.trim();
+
+    saveSession();
+}
+
+
+Object.values(sessionFields).forEach(field => {
+    field.addEventListener("input", saveFormToSession);
+});
+
+
+loadSessionIntoForm();
