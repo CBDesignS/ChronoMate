@@ -16,7 +16,13 @@
 
 <body>
 
-<header class="card app-header">
+<!-- ==========================================================
+     Header
+=========================================================== -->
+
+<div class="container">
+
+<header class="card header">
 
     <div class="header-left">
 
@@ -25,11 +31,22 @@
             alt="ChronoMate Logo"
             class="logo">
 
-        <div class="title-block">
 
-            <h1>ChronoMate 2026</h1>
+        <div class="title">
 
-            <p class="subtext">
+            <h1>
+
+                ChronoMate
+
+            </h1>
+
+            <div class="version">
+
+                2026
+
+            </div>
+
+            <p>
 
                 Lightweight Air Rifle Chronograph Recording Tool
 
@@ -40,9 +57,11 @@
     </div>
 
 
+
     <div class="header-right">
 
-        <div class="header-control">
+
+        <div class="setting">
 
             <label for="powerMode">
 
@@ -69,7 +88,8 @@
         </div>
 
 
-        <div class="header-control">
+
+        <div class="setting">
 
             <label>
 
@@ -77,14 +97,15 @@
 
             </label>
 
-            <button
-                id="themeToggle"
-                class="theme-button"
-                type="button">
+            <label class="switch">
 
-                🌙 Dark
+                <input
+                    type="checkbox"
+                    id="themeToggle">
 
-            </button>
+                <span class="slider"></span>
+
+            </label>
 
         </div>
 
@@ -93,7 +114,12 @@
 </header>
 
 
-    <div class="grid">
+
+<!-- ==========================================================
+     Main Content
+=========================================================== -->
+
+<div class="grid">
 
         <!-- Calculator -->
 
@@ -354,7 +380,7 @@
 
     <footer>
 
-        Version 0.2.1
+        Version 0.3.0
 
         <br><br>
 
