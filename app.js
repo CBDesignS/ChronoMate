@@ -624,3 +624,67 @@ if(generateReportButton)
         generateReportPreview
     );
 }
+//============================================================
+// Clear Shot String
+//============================================================
+
+const clearShotsButton =
+    document.getElementById("btnClearShots");
+
+
+if(clearShotsButton)
+{
+
+    clearShotsButton.addEventListener(
+
+        "click",
+
+        clearShotHistory
+
+    );
+
+}
+
+
+function clearShotHistory()
+{
+
+    if(shotHistory.length===0)
+    {
+
+        alert(
+
+            "There are no shots to clear."
+
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+
+        confirm(
+
+            "Are you sure you want to clear the current shot string?\n\nThis cannot be undone."
+
+        );
+
+
+    if(!confirmed)
+    {
+
+        return;
+
+    }
+
+
+    shotHistory.length = 0;
+
+
+    updateShotTable();
+
+    updateStatistics();
+
+}
