@@ -16,17 +16,81 @@
 
 <body>
 
-<div class="wrapper">
+<header class="card app-header">
 
-    <header class="card">
+    <div class="header-left">
 
-        <h1>🎯 ChronoMate 2026</h1>
+        <img
+            src="assets/logo.png"
+            alt="ChronoMate Logo"
+            class="logo">
 
-        <p class="subtext">
-            Lightweight Air Rifle Chronograph Recording Tool
-        </p>
+        <div class="title-block">
 
-    </header>
+            <h1>ChronoMate 2026</h1>
+
+            <p class="subtext">
+
+                Lightweight Air Rifle Chronograph Recording Tool
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="header-control">
+
+            <label for="powerMode">
+
+                Mode
+
+            </label>
+
+            <select id="powerMode">
+
+                <option value="12">
+
+                    Sub-12 ft-lb
+
+                </option>
+
+                <option value="999">
+
+                    FAC
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="header-control">
+
+            <label>
+
+                Theme
+
+            </label>
+
+            <button
+                id="themeToggle"
+                class="theme-button"
+                type="button">
+
+                🌙 Dark
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
 
 
     <div class="grid">
@@ -290,7 +354,7 @@
 
     <footer>
 
-        Version 0.2.0
+        Version 0.2.1
 
         <br><br>
 
