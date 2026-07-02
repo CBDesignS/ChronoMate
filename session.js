@@ -238,3 +238,42 @@ Object.values(sessionFields).forEach(field => {
 
 
 loadSessionIntoForm();
+//============================================================
+// Build Report Snapshot
+//============================================================
+
+const CHRONOMATE_VERSION = "0.4.0";
+
+
+function buildReportSnapshot(
+    ammoData,
+    shotData,
+    statisticsData
+)
+{
+
+    return {
+
+        software : {
+
+            name : "ChronoMate 2026",
+
+            version : CHRONOMATE_VERSION,
+
+            generated : new Date().toISOString()
+
+        },
+
+        session : structuredClone(
+            chronoSession
+        ),
+
+        ammo : ammoData,
+
+        shots : shotData,
+
+        statistics : statisticsData
+
+    };
+
+}
