@@ -1,7 +1,7 @@
 /*
 ============================================================
  ChronoMate 2026
- Version : v0.3.0 UI Refresh
+ Version : v0.4.0 UI Refresh
  Author  : Chris Bruce (CBDesignS)
 ============================================================
 */
@@ -334,15 +334,11 @@ footer{
     }
 }
 .secondary-button{
-
-    background:#666;
-
+    margin-top:16px;
+    background:#4b5563;
     color:white;
-
 }
 
 .secondary-button:hover{
-
-    background:#555;
-
+    background:#374151;
 }
