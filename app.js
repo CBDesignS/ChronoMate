@@ -592,3 +592,35 @@ function getChronoMateReport()
         getStatisticsForReport()
     );
 }
+//============================================================
+// Generate Report Preview
+//============================================================
+
+const generateReportButton =
+    document.getElementById("btnGenerateReport");
+
+function generateReportPreview()
+{
+    const report =
+        getChronoMateReport();
+
+    console.log(report);
+
+    alert(
+        "Report snapshot generated.\n\n" +
+        "Tester: " + (report.session.tester || "Not entered") + "\n" +
+        "Rifle: " +
+        (report.session.rifle.manufacturer || "") + " " +
+        (report.session.rifle.model || "") + "\n" +
+        "Shots: " + report.statistics.shotCount + "\n" +
+        "Result: " + report.statistics.result
+    );
+}
+
+if(generateReportButton)
+{
+    generateReportButton.addEventListener(
+        "click",
+        generateReportPreview
+    );
+}
