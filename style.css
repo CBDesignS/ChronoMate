@@ -333,19 +333,25 @@ footer{
         grid-template-columns:1fr;
     }
 }
+.shot-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:16px;
+
+}
+
 .secondary-button{
 
     width:auto;
 
     min-width:200px;
 
-    float:right;
-
-    margin-top:16px;
-
     background:#d97706;
 
-    color:white;
+    color:#fff;
 
 }
 
