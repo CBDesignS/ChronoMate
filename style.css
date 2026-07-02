@@ -290,3 +290,53 @@ footer{
     }
 
 }
+/*==========================================================
+  Themes
+==========================================================*/
+
+:root{
+
+    --background:#ececec;
+
+    --card:#ffffff;
+
+    --text:#222222;
+
+    --border:#d0d0d0;
+
+}
+
+
+body{
+
+    background:var(--background);
+
+    color:var(--text);
+
+    transition:.25s;
+
+}
+
+
+.card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    transition:.25s;
+
+}
+
+
+body.dark{
+
+    --background:#171717;
+
+    --card:#242424;
+
+    --text:#eeeeee;
+
+    --border:#3c3c3c;
+
+}
