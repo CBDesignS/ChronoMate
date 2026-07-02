@@ -648,43 +648,33 @@ if(clearShotsButton)
 
 function clearShotHistory()
 {
-
     if(shotHistory.length===0)
     {
-
-        alert(
-
-            "There are no shots to clear."
-
-        );
-
+        alert("There are no shots to clear.");
         return;
-
     }
 
-
-    const confirmed =
-
-        confirm(
-
-            "Are you sure you want to clear the current shot string?\n\nThis cannot be undone."
-
-        );
-
+    const confirmed = confirm(
+        "Clear the current shot string?\n\nAll recorded shots for this session will be removed."
+    );
 
     if(!confirmed)
-    {
-
         return;
 
-    }
+    shotHistory = [];
 
+    shotTable.innerHTML = "";
 
-    shotHistory.length = 0;
+    statistics.textContent =
+        "No shots recorded.";
 
+    energyFTLB.textContent = "0.00";
+    energyJoules.textContent = "0.00";
+    velocityFPS.textContent = "0";
+    velocityMPS.textContent = "0";
 
-    updateShotTable();
+    powerStatus.textContent = "READY";
+    powerStatus.className = "status safe";
 
-    updateStatistics();
-
+    powerBar.style.width = "0%";
 }
