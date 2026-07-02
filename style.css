@@ -333,3 +333,16 @@ footer{
         grid-template-columns:1fr;
     }
 }
+.secondary-button{
+
+    background:#666;
+
+    color:white;
+
+}
+
+.secondary-button:hover{
+
+    background:#555;
+
+}
