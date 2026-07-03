@@ -640,7 +640,27 @@ const reportTheme = {
                     color: ${reportTheme.text};
                     background: ${reportTheme.bodyBg};
                 }
+                
+                .report-toolbar {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 20px;
+                }
 
+                .report-toolbar button {
+                    padding: 10px 16px;
+                    border: none;
+                    border-radius: 8px;
+                    background: #8bc53f;
+                    color: #111;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+
+                .report-toolbar button:hover {
+                    filter: brightness(0.95);
+                }
                 .report-header {
                     display: flex;
                     align-items: center;
@@ -725,7 +745,11 @@ const reportTheme = {
             </style>
         </head>
         <body>
-            <div class="report-header">
+            <div class="report-toolbar">
+                <button onclick="window.print()">🖨 Print / Save PDF</button>
+        </div>
+
+        <div class="report-header">
                 <img src="assets/logo.png" alt="ChronoMate Logo">
                 <div>
                     <h1>ChronoMate 2026</h1>
