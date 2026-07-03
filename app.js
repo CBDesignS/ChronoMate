@@ -673,6 +673,7 @@ const reportTheme = {
                     height: auto;
                     display: block;
                     margin: 0 auto 15px auto;
+                }
                 h1 {
                     margin: 0;
                     text-align: center;
@@ -739,9 +740,8 @@ const reportTheme = {
                 }
 
             }
+        </style>
 
-</style>
-            </style>
         </head>
         <body>
             <div class="report-toolbar">
@@ -752,7 +752,6 @@ const reportTheme = {
                 <img src="assets/logo.png" alt="ChronoMate Logo">
                     <h1>ChronoMate 2026</h1>
                     <p>Chronograph Report</p>
-                </div>
             </div>
 
             <div class="result-banner">
