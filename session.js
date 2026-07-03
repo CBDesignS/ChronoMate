@@ -2,7 +2,7 @@
 ============================================================
  ChronoMate 2026
  Session Management
- Version : v0.4.0
+ Version : v0.5.0
  Author  : Chris Bruce (CBDesignS)
  Developed with ChatGPT (OpenAI GPT-5.5)
 ============================================================
@@ -14,7 +14,7 @@ const STORAGE_KEYS = {
     SESSION : "ChronoMateSession"
 };
 
-const CHRONOMATE_VERSION = "0.4.0";
+const CHRONOMATE_VERSION = "0.5.0";
 
 let chronoSession = {
     tester : "",
