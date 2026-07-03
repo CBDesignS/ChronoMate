@@ -606,6 +606,17 @@ function generateReportPreview() {
 
     const safe = value => value || "Not entered";
 
+const isDarkReport = document.body.classList.contains("dark");
+
+const reportTheme = {
+    bodyBg: isDarkReport ? "#0f172a" : "#ffffff",
+    text: isDarkReport ? "#e5e7eb" : "#111111",
+    panel: isDarkReport ? "#111827" : "#ffffff",
+    border: isDarkReport ? "#374151" : "#cccccc",
+    tableHeader: isDarkReport ? "#1f2937" : "#f3f4f6",
+    muted: isDarkReport ? "#9ca3af" : "#555555"
+};
+
     const shotRows = report.shots.map((shot, index) => `
         <tr>
             <td>${index + 1}</td>
@@ -626,8 +637,8 @@ function generateReportPreview() {
                 body {
                     font-family: Arial, sans-serif;
                     margin: 30px;
-                    color: #111;
-                    background: #fff;
+                    color: ${reportTheme.text};
+                    background: ${reportTheme.bodyBg};
                 }
 
                 .report-header {
@@ -650,7 +661,7 @@ function generateReportPreview() {
 
                 h2 {
                     margin-top: 28px;
-                    border-bottom: 1px solid #ccc;
+                    border-bottom: 1px solid ${reportTheme.border};
                     padding-bottom: 6px;
                 }
 
@@ -678,21 +689,21 @@ function generateReportPreview() {
                 }
 
                 th, td {
-                    border: 1px solid #ccc;
+                    border: 1px solid ${reportTheme.border};
                     padding: 8px;
                     text-align: center;
                 }
 
                 th {
-                    background: #f3f4f6;
+                    background: ${reportTheme.tableHeader};
                 }
 
                 footer {
                     margin-top: 35px;
                     padding-top: 12px;
-                    border-top: 1px solid #ccc;
+                    border-top: 1px solid ${reportTheme.border};
                     font-size: 0.85rem;
-                    color: #555;
+                    color: ${reportTheme.muted};
                     text-align: center;
                 }
             </style>
