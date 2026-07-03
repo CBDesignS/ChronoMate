@@ -706,6 +706,22 @@ const reportTheme = {
                     color: ${reportTheme.muted};
                     text-align: center;
                 }
+      /* Magic Print Button */
+
+                @media print {
+
+                .report-toolbar {
+                    display: none;
+                }
+
+                body {
+                    background: white !important;
+                    color: black !important;
+                }
+
+            }
+
+</style>
             </style>
         </head>
         <body>
