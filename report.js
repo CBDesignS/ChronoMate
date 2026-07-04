@@ -184,6 +184,10 @@ function openReportWindow(report) {
                     @page {
                         margin: 10mm;
                     }
+                    
+                    html {
+                        zoom: 1.18;
+                    }
 
                     .report-toolbar {
                         display: none;
