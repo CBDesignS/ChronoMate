@@ -71,6 +71,12 @@ function openReportWindow(report) {
                     filter: brightness(0.95);
                 }
 
+                .print-note {
+                    margin-right: 12px;
+                    align-self: center;
+                    font-size: 0.85rem;
+                    color: ${reportTheme.muted};
+                }
                 .report-header {
                     text-align: center;
                     border-bottom: 3px solid #8bc53f;
@@ -182,6 +188,7 @@ function openReportWindow(report) {
                 @media print {
 
                     @page {
+                        size: A4 landscape;
                         margin: 10mm;
                     }
                     
@@ -268,6 +275,7 @@ function openReportWindow(report) {
         </head>
         <body>
             <div class="report-toolbar">
+                <div class="print-note">Best printed in A4 landscape</div>
                 <button onclick="window.print()">🖨 Print Report</button>
             </div>
 
