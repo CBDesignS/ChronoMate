@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.6.0
+ Version : v0.7.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -231,6 +231,18 @@ customWeightInput.addEventListener(
 velocityInput.addEventListener(
     "input",
     calculateEnergy
+);
+
+velocityInput.addEventListener(
+    "keydown",
+    function(event)
+    {
+        if (event.key === "Enter")
+        {
+            event.preventDefault();
+            addShot();
+        }
+    }
 );
 
 velocityUnits.addEventListener(
