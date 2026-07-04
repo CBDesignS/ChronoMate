@@ -193,7 +193,7 @@ function openReportWindow(report) {
                         background: white !important;
                         color: black !important;
                         margin: 0;
-                        font-size: 11px;
+                        font-size: 12.5px;
                     }
 
                     .report-header {
@@ -233,12 +233,12 @@ function openReportWindow(report) {
                     }
 
                     .report-panel {
-                        padding: 9px;
-                        border-radius: 5px;
+                        padding: 14px;
+                        border-radius: 6px;
                     }
 
                     .report-section {
-                        margin-bottom: 10px;
+                        margin-bottom: 16px;
                     }
 
                     .info-grid,
@@ -255,7 +255,7 @@ function openReportWindow(report) {
                     }
 
                     th, td {
-                        padding: 4px;
+                        padding: 6px;
                     }
 
                     footer {
