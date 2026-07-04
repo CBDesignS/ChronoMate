@@ -624,6 +624,73 @@ if(generateReportButton)
         generateReportPreview
     );
 }
+
+//============================================================
+// Export ChronoMate Backup
+//============================================================
+
+const exportBackupButton =
+    document.getElementById("btnExportBackup");
+
+
+function exportChronoMateBackup()
+{
+    const backup = {
+        software: {
+            name: "ChronoMate 2026",
+            backupVersion: "1.0",
+            created: new Date().toISOString()
+        },
+
+        session: {
+            tester: document.getElementById("testerName")?.value || "",
+            chronograph: document.getElementById("chronographName")?.value || "",
+            notes: document.getElementById("sessionNotes")?.value || ""
+        },
+
+        rifle: {
+            manufacturer: document.getElementById("rifleManufacturer")?.value || "",
+            model: document.getElementById("rifleModel")?.value || "",
+            serial: document.getElementById("rifleSerial")?.value || "",
+            configuration: document.getElementById("rifleConfiguration")?.value || ""
+        },
+
+        userAmmo: [],
+        savedRifles: []
+    };
+
+    const json =
+        JSON.stringify(backup, null, 4);
+
+    const blob =
+        new Blob([json], { type: "application/json" });
+
+    const link =
+        document.createElement("a");
+
+    const timestamp =
+        new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "");
+
+    link.href =
+        URL.createObjectURL(blob);
+
+    link.download =
+        `ChronoMate_Backup_${timestamp}.json`;
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+}
+
+
+if(exportBackupButton)
+{
+    exportBackupButton.addEventListener(
+        "click",
+        exportChronoMateBackup
+    );
+}
+
 //============================================================
 // Clear Shot String
 //============================================================
