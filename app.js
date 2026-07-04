@@ -638,7 +638,7 @@ function exportChronoMateBackup()
     const backup = {
         software: {
             name: "ChronoMate 2026",
-            backupVersion: "1.0",
+            version: CHRONOMATE_VERSION,
             created: new Date().toISOString()
         },
 
