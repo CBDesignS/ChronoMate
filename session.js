@@ -2,7 +2,7 @@
 ============================================================
  ChronoMate 2026
  Session Management
- Version : v0.6.0
+ Version : v0.7.0
  Author  : Chris Bruce (CBDesignS)
  Developed with ChatGPT (OpenAI GPT-5.5)
 ============================================================
