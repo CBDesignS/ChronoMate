@@ -14,7 +14,7 @@ const STORAGE_KEYS = {
     SESSION : "ChronoMateSession"
 };
 
-const CHRONOMATE_VERSION = "0.5.0";
+const CHRONOMATE_VERSION = "0.7.0";
 
 let chronoSession = {
     tester : "",
