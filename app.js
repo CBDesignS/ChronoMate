@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.6.0
+ Version : v0.7.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -231,6 +231,18 @@ customWeightInput.addEventListener(
 velocityInput.addEventListener(
     "input",
     calculateEnergy
+);
+
+velocityInput.addEventListener(
+    "keydown",
+    function(event)
+    {
+        if (event.key === "Enter")
+        {
+            event.preventDefault();
+            addShot();
+        }
+    }
 );
 
 velocityUnits.addEventListener(
@@ -612,6 +624,183 @@ if(generateReportButton)
         generateReportPreview
     );
 }
+
+//============================================================
+// Export / Import ChronoMate Backup
+//============================================================
+
+const exportBackupButton =
+    document.getElementById("btnExportBackup");
+
+const importBackupButton =
+    document.getElementById("btnImportBackup");
+
+const backupFileInput =
+    document.getElementById("backupFileInput");
+
+
+function getValueById(id)
+{
+    return document.getElementById(id)?.value || "";
+}
+
+
+function setValueById(id, value)
+{
+    const field =
+        document.getElementById(id);
+
+    if(field)
+    {
+        field.value =
+            value || "";
+    }
+}
+
+
+function exportChronoMateBackup()
+{
+    const backup = {
+        software: {
+            name: "ChronoMate 2026",
+            version: CHRONOMATE_VERSION,
+            created: new Date().toISOString()
+        },
+
+        session: {
+            tester: getValueById("testerName"),
+            chronograph: getValueById("chronographName"),
+            notes: getValueById("sessionNotes")
+        },
+
+        currentRifle: {
+            manufacturer: getValueById("rifleManufacturer"),
+            model: getValueById("rifleModel"),
+            serial: getValueById("rifleSerial"),
+            configuration: getValueById("rifleConfiguration")
+        },
+
+        userAmmo: [],
+        savedRifles: []
+    };
+
+    const json =
+        JSON.stringify(backup, null, 4);
+
+    const blob =
+        new Blob([json], { type: "application/json" });
+
+    const link =
+        document.createElement("a");
+
+    const timestamp =
+        new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "");
+
+    link.href =
+        URL.createObjectURL(blob);
+
+    link.download =
+        `ChronoMate_Backup_${timestamp}.json`;
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+}
+
+
+function importChronoMateBackup(backup)
+{
+    if(!backup || !backup.software || backup.software.name !== "ChronoMate 2026")
+    {
+        alert("This is not a valid ChronoMate backup file.");
+        return;
+    }
+
+    const importedSession =
+        backup.session || {};
+
+    const importedRifle =
+        backup.currentRifle || backup.rifle || {};
+
+    setValueById("testerName", importedSession.tester);
+    setValueById("chronographName", importedSession.chronograph);
+    setValueById("sessionNotes", importedSession.notes);
+
+    setValueById("rifleManufacturer", importedRifle.manufacturer);
+    setValueById("rifleModel", importedRifle.model);
+    setValueById("rifleSerial", importedRifle.serial);
+    setValueById("rifleConfiguration", importedRifle.configuration);
+
+    if(typeof saveFormToSession === "function")
+    {
+        saveFormToSession();
+    }
+
+    alert("ChronoMate backup imported successfully.");
+}
+
+
+function handleBackupFileSelected(event)
+{
+    const file =
+        event.target.files[0];
+
+    if(!file)
+    {
+        return;
+    }
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function(loadEvent)
+    {
+        try
+        {
+            const backup =
+                JSON.parse(loadEvent.target.result);
+
+            importChronoMateBackup(backup);
+        }
+        catch(error)
+        {
+            alert("This backup file could not be read.");
+        }
+
+        backupFileInput.value =
+            "";
+    };
+
+    reader.readAsText(file);
+}
+
+
+if(exportBackupButton)
+{
+    exportBackupButton.addEventListener(
+        "click",
+        exportChronoMateBackup
+    );
+}
+
+
+if(importBackupButton && backupFileInput)
+{
+    importBackupButton.addEventListener(
+        "click",
+        function()
+        {
+            backupFileInput.click();
+        }
+    );
+
+    backupFileInput.addEventListener(
+        "change",
+        handleBackupFileSelected
+    );
+}
+
+
 //============================================================
 // Clear Shot String
 //============================================================

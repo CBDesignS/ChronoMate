@@ -1,7 +1,7 @@
 /*
 ============================================================
  ChronoMate 2026
- Version : v0.6.0 UI Refresh
+ Version : v0.7.0 UI Refresh
  Author  : Chris Bruce (CBDesignS)
 ============================================================
 */
@@ -358,5 +358,40 @@ footer{
 .secondary-button:hover{
 
     background:#b45309;
+
+}
+/* ==========================================================
+   Backup Buttons
+========================================================== */
+
+.backup-buttons {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.backup-buttons button {
+
+    flex: 1;
+
+    background: transparent;
+
+    color: inherit;
+
+    border: 1px solid #8bc53f;
+
+    border-radius: 8px;
+
+    padding: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.backup-buttons button:hover {
+
+    background: rgba(139,197,63,0.15);
 
 }
