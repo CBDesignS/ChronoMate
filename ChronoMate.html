@@ -84,39 +84,7 @@
                 </option>
 
             </select>
-            <div class="setting backup-setting">
 
-                <label>
-
-                    Data Backup
-
-                </label>
-
-                <div class="backup-buttons">
-
-                    <button
-                        id="btnExportBackup"
-                        class="secondary-button">
-
-                        Export Data
-
-                    <button
-                        id="btnImportBackup"
-                        class="secondary-button">
-
-                        Import Data
-
-                    </button>
-
-                </div>
-
-                <input
-                    type="file"
-                    id="backupFileInput"
-                    accept=".json"
-                    hidden>
-
-            </div>
         </div>
 
 
@@ -141,7 +109,42 @@
 
         </div>
 
+
+
+        <div class="setting backup-setting">
+
+            <label>
+
+                Data Backup
+
+            </label>
+
+            <div class="backup-buttons">
+
+                <button id="btnExportBackup">
+
+                    Export Data
+
+                </button>
+
+                <button id="btnImportBackup">
+
+                    Import Data
+
+                </button>
+
+            </div>
+
+            <input
+                type="file"
+                id="backupFileInput"
+                accept=".json"
+                hidden>
+
+        </div>
+
     </div>
+
 
 </header>
 
