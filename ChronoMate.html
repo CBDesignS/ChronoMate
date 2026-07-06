@@ -186,6 +186,39 @@
 
     <h2>Rifle Information</h2>
 
+    <label for="savedRifleSelect">Saved Rifles</label>
+    <select id="savedRifleSelect">
+        <option value="">No saved rifles</option>
+    </select>
+
+    <div class="rifle-buttons">
+
+        <button
+            id="btnSaveRifle"
+            class="utility-button">
+
+            Add Rifle
+
+        </button>
+
+        <button
+            id="btnLoadRifle"
+            class="utility-button">
+
+            Load Selected Rifle
+
+        </button>
+
+        <button
+            id="btnDeleteRifle"
+            class="utility-button danger-utility">
+
+            Delete Selected Rifle
+
+        </button>
+
+    </div>
+
     <label for="rifleManufacturer">Manufacturer</label>
     <input
         id="rifleManufacturer"
@@ -278,6 +311,49 @@
                 type="number"
                 step="0.01"
                 placeholder="Leave blank to use selected ammo">
+
+
+            <div class="user-ammo-panel" id="userAmmoPanel">
+
+                <h3>User Pellet</h3>
+
+                <label for="userAmmoManufacturer">
+                    Manufacturer
+                </label>
+
+                <input
+                    id="userAmmoManufacturer"
+                    type="text"
+                    placeholder="e.g. JSB">
+
+                <label for="userAmmoName">
+                    Pellet Name
+                </label>
+
+                <input
+                    id="userAmmoName"
+                    type="text"
+                    placeholder="e.g. Exact Custom Batch">
+
+                <label for="userAmmoWeight">
+                    Weight (grains)
+                </label>
+
+                <input
+                    id="userAmmoWeight"
+                    type="number"
+                    step="0.01"
+                    placeholder="e.g. 15.89">
+
+                <button
+                    id="btnSaveUserAmmo"
+                    class="utility-button">
+
+                    Add User Pellet
+
+                </button>
+
+            </div>
 
 
             <label for="velocityUnits">
@@ -486,7 +562,7 @@
 
     <footer>
 
-        Version 0.7.0
+        Version 0.8.0
 
         <br><br>
 

@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.7.0
+ Version : v0.8.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -20,7 +20,12 @@
 //============================================================
 
 let ammoDatabase = [];
+let userAmmo = [];
+let savedRifles = [];
 let shotHistory = [];
+
+const USER_AMMO_STORAGE_KEY = "ChronoMateUserAmmo";
+const SAVED_RIFLES_STORAGE_KEY = "ChronoMateSavedRifles";
 
 
 //============================================================
@@ -32,6 +37,17 @@ const manufacturerSelect = document.getElementById("manufacturer");
 const ammoSelect         = document.getElementById("ammo");
 
 const customWeightInput  = document.getElementById("customWeight");
+
+const userAmmoManufacturerInput = document.getElementById("userAmmoManufacturer");
+const userAmmoNameInput         = document.getElementById("userAmmoName");
+const userAmmoWeightInput       = document.getElementById("userAmmoWeight");
+const saveUserAmmoButton        = document.getElementById("btnSaveUserAmmo");
+const userAmmoPanel             = document.getElementById("userAmmoPanel");
+
+const savedRifleSelect          = document.getElementById("savedRifleSelect");
+const saveRifleButton           = document.getElementById("btnSaveRifle");
+const loadRifleButton           = document.getElementById("btnLoadRifle");
+const deleteRifleButton         = document.getElementById("btnDeleteRifle");
 
 const velocityInput      = document.getElementById("velocity");
 const velocityUnits      = document.getElementById("velocityUnits");
@@ -79,6 +95,284 @@ function fpsToMetres(fps)
 
 
 //============================================================
+// User Ammo Storage
+//============================================================
+
+function loadUserAmmo()
+{
+    try
+    {
+        userAmmo =
+            JSON.parse(
+                localStorage.getItem(USER_AMMO_STORAGE_KEY)
+            ) || [];
+    }
+    catch(error)
+    {
+        userAmmo = [];
+    }
+}
+
+
+function saveUserAmmo()
+{
+    localStorage.setItem(
+        USER_AMMO_STORAGE_KEY,
+        JSON.stringify(userAmmo)
+    );
+}
+
+
+function getUserAmmoForCurrentCalibre()
+{
+    return userAmmo.filter(item =>
+        item.calibre === calibreSelect.value
+    );
+}
+
+
+function getAmmoListForSelectedManufacturer()
+{
+    const manufacturer =
+        manufacturerSelect.value;
+
+    if(manufacturer === "User Ammo")
+    {
+        return getUserAmmoForCurrentCalibre();
+    }
+
+    return ammoDatabase.filter(item =>
+        item.manufacturer === manufacturer
+    );
+}
+
+
+function saveUserAmmoFromForm()
+{
+    const manufacturer =
+        userAmmoManufacturerInput?.value.trim() || "";
+
+    const name =
+        userAmmoNameInput?.value.trim() || "";
+
+    const grains =
+        parseFloat(userAmmoWeightInput?.value);
+
+    if(!manufacturer || !name || isNaN(grains) || grains <= 0)
+    {
+        alert("Please enter manufacturer, pellet name, and a valid weight.");
+        return;
+    }
+
+    const newAmmo = {
+        id: Date.now().toString(),
+        calibre: calibreSelect.value,
+        manufacturer: manufacturer,
+        name: name,
+        grains: grains
+    };
+
+    userAmmo.push(newAmmo);
+    saveUserAmmo();
+
+    if(userAmmoManufacturerInput)
+        userAmmoManufacturerInput.value = "";
+
+    if(userAmmoNameInput)
+        userAmmoNameInput.value = "";
+
+    if(userAmmoWeightInput)
+        userAmmoWeightInput.value = "";
+
+    buildManufacturerList();
+
+    manufacturerSelect.value = "User Ammo";
+    buildAmmoList();
+
+    ammoSelect.selectedIndex =
+        getUserAmmoForCurrentCalibre().length - 1;
+
+    updateSelectedAmmo();
+}
+
+
+
+
+function updateUserAmmoPanelVisibility()
+{
+    if(!userAmmoPanel)
+        return;
+
+    userAmmoPanel.style.display =
+        manufacturerSelect.value === "User Ammo"
+            ? "block"
+            : "none";
+}
+
+
+//============================================================
+// Saved Rifle Storage
+//============================================================
+
+function loadSavedRifles()
+{
+    try
+    {
+        savedRifles =
+            JSON.parse(
+                localStorage.getItem(SAVED_RIFLES_STORAGE_KEY)
+            ) || [];
+    }
+    catch(error)
+    {
+        savedRifles = [];
+    }
+}
+
+
+function saveSavedRifles()
+{
+    localStorage.setItem(
+        SAVED_RIFLES_STORAGE_KEY,
+        JSON.stringify(savedRifles)
+    );
+}
+
+
+function getCurrentRifleFromForm()
+{
+    return {
+        id: Date.now().toString(),
+        manufacturer: document.getElementById("rifleManufacturer")?.value.trim() || "",
+        model: document.getElementById("rifleModel")?.value.trim() || "",
+        serial: document.getElementById("rifleSerial")?.value.trim() || "",
+        configuration: document.getElementById("rifleConfiguration")?.value.trim() || ""
+    };
+}
+
+
+function getRifleDisplayName(rifle)
+{
+    const parts = [
+        rifle.manufacturer,
+        rifle.model,
+        rifle.configuration
+    ].filter(Boolean);
+
+    return parts.join(" - ") || "Unnamed Rifle";
+}
+
+
+function buildSavedRifleList()
+{
+    if(!savedRifleSelect)
+        return;
+
+    savedRifleSelect.innerHTML = "";
+
+    if(savedRifles.length === 0)
+    {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No saved rifles";
+        savedRifleSelect.appendChild(option);
+        return;
+    }
+
+    savedRifles.forEach(rifle =>
+    {
+        const option = document.createElement("option");
+        option.value = rifle.id;
+        option.textContent = getRifleDisplayName(rifle);
+        savedRifleSelect.appendChild(option);
+    });
+}
+
+
+function saveCurrentRifle()
+{
+    const rifle =
+        getCurrentRifleFromForm();
+
+    if(!rifle.manufacturer && !rifle.model)
+    {
+        alert("Enter at least a rifle manufacturer or model before saving.");
+        return;
+    }
+
+    savedRifles.push(rifle);
+    saveSavedRifles();
+    buildSavedRifleList();
+
+    if(savedRifleSelect)
+        savedRifleSelect.value = rifle.id;
+
+    alert("Rifle saved.");
+}
+
+
+function loadSelectedRifle()
+{
+    if(!savedRifleSelect || !savedRifleSelect.value)
+    {
+        alert("Select a saved rifle first.");
+        return;
+    }
+
+    const rifle =
+        savedRifles.find(item =>
+            item.id === savedRifleSelect.value
+        );
+
+    if(!rifle)
+        return;
+
+    setValueById("rifleManufacturer", rifle.manufacturer);
+    setValueById("rifleModel", rifle.model);
+    setValueById("rifleSerial", rifle.serial);
+    setValueById("rifleConfiguration", rifle.configuration);
+
+    if(typeof saveFormToSession === "function")
+    {
+        saveFormToSession();
+    }
+}
+
+
+function deleteSelectedRifle()
+{
+    if(!savedRifleSelect || !savedRifleSelect.value)
+    {
+        alert("Select a saved rifle first.");
+        return;
+    }
+
+    const rifle =
+        savedRifles.find(item =>
+            item.id === savedRifleSelect.value
+        );
+
+    if(!rifle)
+        return;
+
+    const confirmed = confirm(
+        "Delete saved rifle?\n\n" + getRifleDisplayName(rifle)
+    );
+
+    if(!confirmed)
+        return;
+
+    savedRifles =
+        savedRifles.filter(item =>
+            item.id !== rifle.id
+        );
+
+    saveSavedRifles();
+    buildSavedRifleList();
+}
+
+
+//============================================================
 // Load Ammo Database
 //============================================================
 
@@ -101,10 +395,18 @@ function buildManufacturerList()
 {
     manufacturerSelect.innerHTML = "";
 
+    const selectedManufacturer =
+        manufacturerSelect.value;
+
     const manufacturers =
         [...new Set(
             ammoDatabase.map(item => item.manufacturer)
         )].sort();
+
+    if(getUserAmmoForCurrentCalibre().length > 0)
+    {
+        manufacturers.push("User Ammo");
+    }
 
     manufacturers.forEach(manufacturer =>
     {
@@ -116,6 +418,11 @@ function buildManufacturerList()
         manufacturerSelect.appendChild(option);
     });
 
+    if(manufacturers.includes(selectedManufacturer))
+    {
+        manufacturerSelect.value = selectedManufacturer;
+    }
+
     buildAmmoList();
 }
 //============================================================
@@ -126,24 +433,31 @@ function buildAmmoList()
 {
     ammoSelect.innerHTML = "";
 
-    const manufacturer = manufacturerSelect.value;
-
-    const ammoList = ammoDatabase.filter(item =>
-        item.manufacturer === manufacturer
-    );
+    const ammoList =
+        getAmmoListForSelectedManufacturer();
 
     ammoList.forEach((ammo, index) =>
     {
         const option = document.createElement("option");
 
         option.value = index;
-        option.textContent =
-            `${ammo.name} (${ammo.grains.toFixed(2)} gr)`;
+
+        if(manufacturerSelect.value === "User Ammo")
+        {
+            option.textContent =
+                `${ammo.manufacturer} - ${ammo.name} (${ammo.grains.toFixed(2)} gr)`;
+        }
+        else
+        {
+            option.textContent =
+                `${ammo.name} (${ammo.grains.toFixed(2)} gr)`;
+        }
 
         ammoSelect.appendChild(option);
     });
 
     updateSelectedAmmo();
+    updateUserAmmoPanelVisibility();
 }
 
 
@@ -153,11 +467,8 @@ function buildAmmoList()
 
 function updateSelectedAmmo()
 {
-    const manufacturer = manufacturerSelect.value;
-
-    const ammoList = ammoDatabase.filter(item =>
-        item.manufacturer === manufacturer
-    );
+    const ammoList =
+        getAmmoListForSelectedManufacturer();
 
     const selectedAmmo = ammoList[ammoSelect.selectedIndex];
 
@@ -186,13 +497,8 @@ function getCurrentWeight()
     if (!isNaN(custom) && custom > 0)
         return custom;
 
-    const manufacturer =
-        manufacturerSelect.value;
-
     const ammoList =
-        ammoDatabase.filter(item =>
-            item.manufacturer === manufacturer
-        );
+        getAmmoListForSelectedManufacturer();
 
     const selectedAmmo =
         ammoList[ammoSelect.selectedIndex];
@@ -227,6 +533,39 @@ customWeightInput.addEventListener(
     "input",
     calculateEnergy
 );
+
+
+if(saveUserAmmoButton)
+{
+    saveUserAmmoButton.addEventListener(
+        "click",
+        saveUserAmmoFromForm
+    );
+}
+
+if(saveRifleButton)
+{
+    saveRifleButton.addEventListener(
+        "click",
+        saveCurrentRifle
+    );
+}
+
+if(loadRifleButton)
+{
+    loadRifleButton.addEventListener(
+        "click",
+        loadSelectedRifle
+    );
+}
+
+if(deleteRifleButton)
+{
+    deleteRifleButton.addEventListener(
+        "click",
+        deleteSelectedRifle
+    );
+}
 
 velocityInput.addEventListener(
     "input",
@@ -458,6 +797,9 @@ addShotButton.addEventListener(
     addShot
 );
 
+loadUserAmmo();
+loadSavedRifles();
+buildSavedRifleList();
 loadAmmoDatabase();
 //============================================================
 // Theme Support
@@ -517,13 +859,8 @@ setTheme(
 
 function getSelectedAmmoForReport()
 {
-    const manufacturer =
-        manufacturerSelect.value;
-
     const ammoList =
-        ammoDatabase.filter(item =>
-            item.manufacturer === manufacturer
-        );
+        getAmmoListForSelectedManufacturer();
 
     const selectedAmmo =
         ammoList[ammoSelect.selectedIndex];
@@ -680,8 +1017,8 @@ function exportChronoMateBackup()
             configuration: getValueById("rifleConfiguration")
         },
 
-        userAmmo: [],
-        savedRifles: []
+        userAmmo: userAmmo,
+        savedRifles: savedRifles
     };
 
     const json =
@@ -730,6 +1067,20 @@ function importChronoMateBackup(backup)
     setValueById("rifleModel", importedRifle.model);
     setValueById("rifleSerial", importedRifle.serial);
     setValueById("rifleConfiguration", importedRifle.configuration);
+
+    if(Array.isArray(backup.userAmmo))
+    {
+        userAmmo = backup.userAmmo;
+        saveUserAmmo();
+        loadAmmoDatabase();
+    }
+
+    if(Array.isArray(backup.savedRifles))
+    {
+        savedRifles = backup.savedRifles;
+        saveSavedRifles();
+        buildSavedRifleList();
+    }
 
     if(typeof saveFormToSession === "function")
     {

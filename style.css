@@ -395,3 +395,68 @@ footer{
     background: rgba(139,197,63,0.15);
 
 }
+
+
+/* ==========================================================
+   User Ammo Panel
+========================================================== */
+
+.user-ammo-panel {
+    margin: 18px 0;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card-soft);
+}
+
+.user-ammo-panel h3 {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    color: var(--accent);
+}
+
+.utility-button {
+    margin-top: 10px;
+    background: transparent;
+    color: inherit;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.utility-button:hover {
+    background: var(--accent-soft);
+}
+
+
+/* ==========================================================
+   Saved Rifle Controls
+========================================================== */
+
+.rifle-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 12px 0 18px;
+}
+
+.rifle-buttons .utility-button {
+    width: 100%;
+    margin-top: 0;
+}
+
+.danger-utility {
+    border-color: var(--amber);
+}
+
+.danger-utility:hover {
+    background: rgba(245,158,11,0.15);
+}
+
+@media(max-width:760px){
+    .rifle-buttons{
+        grid-template-columns:1fr;
+    }
+}
