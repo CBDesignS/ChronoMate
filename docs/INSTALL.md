@@ -46,7 +46,7 @@ JavaScript must be enabled.
 Example:
 
 ChronoMate/
-¦
+Â¦
 +-- ChronoMate.html
 +-- app.js
 +-- report.js
@@ -104,3 +104,9 @@ Mobile operating systems often restrict local HTML applications from accessing l
 ## Need Help?
 
 See the User Guide for information on recording sessions, generating reports and managing your saved data.
+
+---
+
+## Next Step
+
+Continue to the [User Guide](USERGUIDE.md).
