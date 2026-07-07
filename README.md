@@ -45,18 +45,17 @@ ChronoMate has been designed around one simple principle:
 The aim is to remain lightweight, fast, easy to use and easy to maintain without unnecessary complexity.
 
 ---
-
 ## Documentation
 
-Full documentation is included with the project.
+The complete ChronoMate documentation is included with the project.
 
-- Installation Guide
-- User Guide
-- Backup & Restore
-- Frequently Asked Questions
-- Changelog
+The guides below can be viewed directly on GitHub or opened from the **docs** folder included with every release.
 
-Documentation can be found in the **docs** folder.
+- [Installation Guide](docs/INSTALL.md)
+- [User Guide](docs/USERGUIDE.md)
+- [Backup & Restore](docs/BACKUP.md)
+- [Frequently Asked Questions](docs/FAQ.md)
+- [Changelog](docs/CHANGELOG.md)
 
 ---
 
