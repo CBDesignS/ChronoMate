@@ -1,48 +1,114 @@
 <div align="center">
-  <img src="https://github.com/CBDesignS/ChronoMate/blob/main/assets/logo.png?raw=true" alt="ChronoMate 2026 Logo" width="600">
-  <h1>⏱️ ChronoMate 2026</h1>
+
+<img src="assets/logo.png" alt="ChronoMate 2026 Logo" width="600">
+
+# ChronoMate 2026
+
+### Lightweight, offline chronograph recording software for air rifles.
+
 </div>
 
 ---
 
-## 🚀 Overview
+## Overview
 
-A lightweight, offline chronograph companion for airgun shooters.
+ChronoMate 2026 is a lightweight desktop application for recording air rifle chronograph sessions.
 
-ChronoMate 2026 is designed to be the fastest, simplest, and most enjoyable chronograph companion for airgun shooters. It runs entirely from a **single HTML file**, ensuring total portability and privacy.
+Designed to be simple, fast and completely offline, ChronoMate allows you to record shot strings, calculate muzzle energy, manage rifle and pellet information, and generate professional printable reports.
 
-* ✅ **No installation required**
-* ✅ **Platform Agnostic:** Works on Windows, Android, iPhone, Linux, and macOS
-* ✅ **100% Offline:** No internet connection needed
+No installation is required. Simply extract the release archive and open **ChronoMate.html** using a supported desktop browser.
 
 ---
 
-## 📋 Features
-* **Calculations:** Live ft-lb and Joules calculations.
-* **Units:** Supports both FPS and m/s.
-* **Data Management:** Shot string recording with a built-in pellet database.
-* **Analytics:** Calculate Average FPS, Extreme Spread, and Standard Deviation.
-* **Export:** CSV export functionality to save or share your sessions.
-* **User Experience:** Fully responsive design with a built-in Dark Theme.
+## Key Features
+
+- Lightweight and portable
+- Runs completely offline
+- No installation required
+- Professional printable reports
+- Automatic ft-lb and Joule calculations
+- Supports FPS and m/s
+- Built-in pellet database
+- User pellet database
+- Saved rifle profiles
+- Portable Backup & Restore
+- Light and Dark themes
 
 ---
 
-## 🎯 Project Goals
-ChronoMate is built on a philosophy of simplicity and user privacy:
-* **Completely Free** & Open Source
-* **No Adverts** or tracking
-* **No Analytics**
-* **No Internet Required**
+## Design Philosophy
+
+ChronoMate has been designed around one simple principle:
+
+> **If a feature does not improve the recording, reporting or management of chronograph sessions, it does not belong in the application.**
+
+The aim is to remain lightweight, fast, easy to use and easy to maintain without unnecessary complexity.
 
 ---
 
-## 🤝 Credits
+## Documentation
 
-**Designed & Developed by**
-* Chris Bruce ([CBDesignS](https://github.com/CBDesignS))
+Full documentation is included with the project.
 
-**Developed in collaboration with**
-* ChatGPT (OpenAI GPT-5.5)
+- Installation Guide
+- User Guide
+- Backup & Restore
+- Frequently Asked Questions
+- Changelog
+
+Documentation can be found in the **docs** folder.
 
 ---
-> *ChronoMate: Just open it and start shooting.*
+
+## System Requirements
+
+Tested on:
+
+- Windows 10
+- Windows 11
+
+Supported browsers:
+
+- Mozilla Firefox
+- Microsoft Edge
+- Brave Browser
+
+ChronoMate is designed for desktop browsers.
+
+Android and iOS local file execution are not currently supported due to mobile operating system restrictions.
+
+---
+
+## Project Status
+
+ChronoMate is feature complete.
+
+Future releases will focus on:
+
+- Documentation improvements
+- Built-in pellet database expansion
+- Bug fixes
+- Long-term maintenance
+
+New functionality will only be added where it clearly improves the recording, reporting or management of chronograph sessions while preserving ChronoMate's lightweight design philosophy.
+
+---
+
+## Credits
+
+Designed and Developed by
+
+**Chris Bruce**
+(CBDesignS)
+
+Developed in collaboration with
+
+**OpenAI ChatGPT**
+
+---
+
+## License
+
+ChronoMate 2026 is distributed under the MIT License.
+
+See the LICENSE file for details.
