@@ -50,6 +50,9 @@ const loadRifleButton           = document.getElementById("btnLoadRifle");
 const deleteRifleButton         = document.getElementById("btnDeleteRifle");
 
 const velocityInput      = document.getElementById("velocity");
+const shotTargetSelect   = document.getElementById("shotTarget");
+const shotCounter        = document.getElementById("shotCounter");
+const shotCounterBox     = document.getElementById("shotCounterBox");
 const velocityUnits      = document.getElementById("velocityUnits");
 
 const powerMode          = document.getElementById("powerMode");
@@ -718,8 +721,53 @@ function updatePowerBar(ftlb)
     }
 }
 //============================================================
+// Shot Counter
+//============================================================
+
+function updateShotCounter()
+{
+    if(!shotTargetSelect || !shotCounter)
+    {
+        return;
+    }
+
+    const target =
+        Number(shotTargetSelect.value) || 10;
+
+    const recorded =
+        shotHistory.length;
+
+    const complete =
+        recorded >= target;
+
+    shotCounter.textContent =
+        complete
+            ? `${recorded} of ${target} ✓`
+            : `${recorded} of ${target}`;
+
+    if(shotCounterBox)
+    {
+        shotCounterBox.classList.toggle(
+            "complete",
+            complete
+        );
+    }
+}
+
+
+if(shotTargetSelect)
+{
+    shotTargetSelect.addEventListener(
+        "change",
+        updateShotCounter
+    );
+}
+
+
+//============================================================
 // Add Shot
 //============================================================
+
 
 function addShot()
 {
@@ -742,6 +790,8 @@ function addShot()
     shotTable.appendChild(row);
 
     updateStatistics();
+
+    updateShotCounter();
 
     velocityInput.value = "";
     velocityInput.focus();
@@ -1206,3 +1256,11 @@ function clearShotHistory()
 
     powerBar.style.width = "0%";
 }
+
+
+
+//============================================================
+// Initialise Shot Counter
+//============================================================
+
+updateShotCounter();

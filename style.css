@@ -460,3 +460,49 @@ footer{
         grid-template-columns:1fr;
     }
 }
+
+
+/* ==========================================================
+   Shot Counter Panel
+========================================================== */
+
+.shot-counter-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--card-soft);
+}
+
+.shot-counter-half {
+    padding: 14px;
+}
+
+.shot-counter-half:first-child {
+    border-right: 1px solid var(--border);
+}
+
+.shot-counter-half label {
+    margin-bottom: 8px;
+}
+
+.shot-counter-recorded {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-weight: 900;
+}
+
+.shot-counter-recorded.complete {
+    background: rgba(34,197,94,0.20);
+    color: var(--green);
+}
+
+.shot-counter-recorded.complete label {
+    color: var(--green);
+}
+
