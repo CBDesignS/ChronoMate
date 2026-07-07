@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.8.0
+ Version : v0.9.0
 
  Author:
  Chris Bruce (CBDesignS)
