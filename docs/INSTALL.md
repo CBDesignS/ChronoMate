@@ -107,6 +107,10 @@ See the User Guide for information on recording sessions, generating reports and
 
 ---
 
-## Next Step
+---
 
-Continue to the [User Guide](USERGUIDE.md).
+## Documentation
+
+↑ [Project README](../README.md)
+
+→ [User Guide](USERGUIDE.md)
