@@ -330,3 +330,11 @@ ChronoMate was designed from the beginning to remain:
 - Portable
 
 The project has always focused on recording and reporting chronograph sessions without unnecessary features, ensuring the application remains simple, reliable and easy to maintain.
+
+---
+
+## Documentation Pages
+
+← [Frequently Asked Questions](FAQ.md)
+
+↑ [Project README](../README.md)
