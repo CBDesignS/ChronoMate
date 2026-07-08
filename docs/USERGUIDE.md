@@ -162,5 +162,10 @@ Most issues are caused by incomplete extraction of the release ZIP archive.
 
 ---
 
-Return to the
-[Project README](../README.md)
+## Documentation Pages
+
+← [Installation Guide](INSTALL.md)
+
+↑ [Project README](../README.md)
+
+→ [Backup & Restore](BACKUP.md)
