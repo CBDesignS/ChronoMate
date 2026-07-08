@@ -107,8 +107,6 @@ See the User Guide for information on recording sessions, generating reports and
 
 ---
 
----
-
 ## Documentation
 
 ↑ [Project README](../README.md)
