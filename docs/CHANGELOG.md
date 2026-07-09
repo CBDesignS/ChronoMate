@@ -34,6 +34,47 @@ New functionality will only be considered where it directly improves the recordi
 
 ---
 
+v0.9.9
+
+---
+
+## Version 0.9.7
+
+### Added
+
+* Added built-in support for **.25 calibre** air rifle pellets.
+* Expanded the built-in pellet database with a range of currently available **.25** pellets from leading manufacturers.
+
+### Improved
+
+* Updated calibre selection to support **.177**, **.22** and **.25** built-in pellet databases.
+* Expanded and refined the built-in pellet database using currently available production pellets.
+* Updated project documentation to reflect .25 calibre support.
+* Improved documentation consistency across the README and user guides.
+
+### Notes
+
+This release completes the planned expansion of the built-in pellet database before the Version **1.0.0** release.
+
+ChronoMate remains feature complete, with development continuing to focus on documentation, testing and long-term maintainability rather than adding unnecessary features.
+
+---
+
+## Version 0.9.6
+
+### Added
+
+* Added built-in support for **.25 calibre** air rifle pellets.
+* Expanded the built-in pellet database with a selection of currently available **.25** pellets from leading manufacturers.
+
+### Improved
+
+* Updated calibre selection to support **.177**, **.22** and **.25** built-in pellet databases.
+* Expanded the built-in pellet database using currently available production pellets to improve out-of-the-box compatibility.
+* Updated project documentation to reflect .25 calibre support and improve consistency across the documentation set.
+
+---
+
 ## v0.9.5 – Complete Development History
 
 ### Added

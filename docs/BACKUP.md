@@ -15,9 +15,9 @@ The backup contains all user-created data, including:
 - Application settings
 - Saved rifle profiles
 - User pellet database
-- Other ChronoMate user data
+- Session information (tester, chronograph and notes)
 
-The built-in pellet database is **not** included because it forms part of the ChronoMate application itself and is updated through new software releases.
+The built-in pellet database (.177, .22 and .25) is not included because it forms part of the ChronoMate application itself and is updated through new software releases.
 
 ---
 
@@ -29,7 +29,7 @@ The built-in pellet database is **not** included because it forms part of the Ch
 4. Keep the file somewhere safe.
 
 It is recommended that a backup is created before installing a newer version of ChronoMate.
-
+It is recommended to test your backup occasionally by importing it into a newer ChronoMate release.
 ---
 
 ## Restoring a Backup

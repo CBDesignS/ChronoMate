@@ -8,11 +8,11 @@ ChronoMate is a lightweight, offline chronograph recording application designed 
 
 ChronoMate has been designed to be:
 
-- Lightweight
-- Fast
-- Offline
-- Easy to use
-- Easy to maintain
+* Lightweight
+* Fast
+* Offline
+* Easy to use
+* Easy to maintain
 
 No installation is required.
 
@@ -22,14 +22,14 @@ No installation is required.
 
 ChronoMate has been tested using:
 
-- Windows 10
-- Windows 11
+* Windows 10
+* Windows 11
 
 Supported desktop browsers:
 
-- Mozilla Firefox
-- Microsoft Edge
-- Brave Browser
+* Mozilla Firefox
+* Microsoft Edge
+* Brave Browser
 
 JavaScript must be enabled.
 
@@ -45,17 +45,28 @@ JavaScript must be enabled.
 
 Example:
 
+```text
 ChronoMate/
-¦
-+-- ChronoMate.html
-+-- app.js
-+-- report.js
-+-- session.js
-+-- style.css
-+-- assets/
-+-- data/
+│
+├── ChronoMate.html
+├── app.js
+├── report.js
+├── session.js
+├── style.css
+├── README.md
+├── LICENSE
+├── assets/
+├── data/
+│   └── ammo.js
+└── docs/
+    ├── INSTALL.md
+    ├── USERGUIDE.md
+    ├── BACKUP.md
+    ├── CHANGELOG.md
+    └── FAQ.md
+```
 
-4. Double-click **ChronoMate.html**
+4. Double-click **ChronoMate.html**.
 
 No installation is performed.
 
@@ -87,7 +98,7 @@ ChronoMate is intended for desktop operating systems using modern desktop browse
 
 Current supported environments:
 
-- Windows
+* Windows
 
 Other desktop operating systems may also work but have not yet been fully tested.
 
