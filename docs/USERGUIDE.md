@@ -57,7 +57,7 @@ Saved rifle profiles are stored locally and included when using the Backup & Res
 
 # Selecting Ammunition
 
-ChronoMate includes a built-in pellet database covering many popular manufacturers and pellet types.
+ChronoMate includes a built-in pellet database covering many popular .177, .22 and .25 air rifle pellets from leading manufacturers.
 
 If your ammunition is not listed, you can create your own User Pellet.
 
@@ -136,6 +136,7 @@ This includes:
 
 - Saved rifles
 - User pellets
+- Session information
 - Settings
 
 For detailed instructions see the
@@ -158,7 +159,7 @@ If you experience problems using ChronoMate:
 2. Ensure all application files remain in their original folders.
 3. Verify JavaScript is enabled.
 
-Most issues are caused by incomplete extraction of the release ZIP archive.
+Most startup issues are caused by incomplete extraction of the release ZIP archive or by moving application files out of their original folders.
 
 ---
 
