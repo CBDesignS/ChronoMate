@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.9.0
+ Version : v0.9.7
 
  Author:
  Chris Bruce (CBDesignS)
@@ -381,10 +381,24 @@ function deleteSelectedRifle()
 
 function loadAmmoDatabase()
 {
-    ammoDatabase =
-        calibreSelect.value === ".177"
-            ? ammo177
-            : ammo22;
+    switch(calibreSelect.value)
+    {
+        case ".177":
+            ammoDatabase = ammo177;
+            break;
+
+        case ".22":
+            ammoDatabase = ammo22;
+            break;
+
+        case ".25":
+            ammoDatabase = ammo25;
+            break;
+
+        default:
+            ammoDatabase = ammo177;
+            break;
+    }
 
     buildManufacturerList();
 }
