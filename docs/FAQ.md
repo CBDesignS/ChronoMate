@@ -103,6 +103,8 @@ Users wishing to record additional pellets should use the User Pellet feature.
 
 Future ChronoMate releases may expand the built-in database.
 
+if you find pellets that are not in the list please feel free to submit them to me so we can add them in future versions.
+
 ---
 
 ## Can I save more than one rifle?
