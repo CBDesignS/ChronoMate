@@ -69,8 +69,9 @@ This includes:
 - Application settings
 - Saved rifle profiles
 - User pellets
+- Session information (tester, chronograph and notes)
 
-The built-in pellet database forms part of the application itself.
+The built-in pellet database (.177, .22 and .25) forms part of the application itself.
 
 ---
 
