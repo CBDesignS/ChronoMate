@@ -30,6 +30,8 @@ The built-in pellet database (.177, .22 and .25) is not included because it form
 
 It is recommended that a backup is created before installing a newer version of ChronoMate.
 It is recommended to test your backup occasionally by importing it into a newer ChronoMate release.
+
+📷 **[View Backup Controls Screenshot](images/backup-restore.png)**
 ---
 
 ## Restoring a Backup
@@ -41,6 +43,7 @@ It is recommended to test your backup occasionally by importing it into a newer 
 
 Your saved settings, rifles and user pellets will be restored automatically.
 
+📷 **[View Backup Controls Screenshot](images/backup-restored.png)**
 ---
 
 ## Moving to Another Computer

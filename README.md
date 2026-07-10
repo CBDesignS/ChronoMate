@@ -36,6 +36,10 @@ No installation is required. Simply extract the release archive and open **Chron
 
 ---
 
+📷 **[View Main Window Screenshot](docs/images/main-window.png)**
+
+---
+
 ## Design Philosophy
 
 ChronoMate has been designed around one simple principle:
@@ -69,9 +73,10 @@ Tested on:
 
 Supported browsers:
 
-* Mozilla Firefox
-* Microsoft Edge
-* Brave Browser
+* Mozilla Firefox ( tested on Version 1520.5 (64-bit))
+* Microsoft Edge (tested on Version 135.0.7049.115 (Official Build) (64-bit))
+* Brave Browser (tested on )
+* Chrome (tested on Version 135.0.7049.115 (Official Build) (64-bit))
 
 ChronoMate is designed for desktop browsers.
 
