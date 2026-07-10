@@ -55,6 +55,10 @@ Select an existing rifle from the list or create a new one.
 
 Saved rifle profiles are stored locally and included when using the Backup & Restore feature.
 
+📷 **[View Rifle Management Screenshot](images/rifles.png)**
+
+📷 **[View Saved Rifles Screenshot](images/saved-rifles-dropdown.png)**
+
 ---
 
 # Selecting Ammunition
@@ -64,6 +68,8 @@ ChronoMate includes a built-in pellet database covering many popular .177, .22 a
 If your ammunition is not listed, you can create your own User Pellet.
 
 User pellets are stored separately from the built-in database so future ChronoMate updates will never overwrite your custom entries.
+
+📷 **[View Ammo Selection Screenshot](images/ammo-select.png)**
 
 ---
 
@@ -117,6 +123,8 @@ The report includes:
 - Calculated statistics
 
 Reports are designed for landscape printing and may also be saved as PDF using your browser's Print function.
+
+📷 **[View Example Report](images/report.png)**
 
 ---
 
