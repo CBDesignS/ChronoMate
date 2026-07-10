@@ -420,10 +420,8 @@ function buildManufacturerList()
             ammoDatabase.map(item => item.manufacturer)
         )].sort();
 
-    if(getUserAmmoForCurrentCalibre().length > 0)
-    {
-        manufacturers.push("User Ammo");
-    }
+    // Always show the User Ammo option so new pellets can be added
+    manufacturers.push("User Ammo");
 
     manufacturers.forEach(manufacturer =>
     {
