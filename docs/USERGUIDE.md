@@ -17,6 +17,8 @@ A typical session consists of:
 
 All information is stored locally on your computer. No internet connection is required.
 
+📷 **[View Main Window Screenshot](docs/images/main-window.png)**
+
 ---
 
 # Starting ChronoMate
