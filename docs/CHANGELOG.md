@@ -34,7 +34,52 @@ New functionality will only be considered where it directly improves the recordi
 
 ---
 
-v0.9.9
+## [v0.9.9] - Final Release Candidate
+
+### Added
+- Added support for entering custom pellet weights in either **grains** or **grams**.
+- Added automatic weight conversion when switching between grains and grams during data entry.
+- Added the ability to delete previously saved User Pellets with confirmation.
+- Added permanent access to the **User Ammo** manufacturer option, allowing new users to create their first custom pellet without requiring an existing entry.
+
+### Fixed
+- Fixed a regression where the **User Ammo** option disappeared when no custom pellets existed for the selected calibre.
+- Corrected the custom pellet workflow to ensure user pellets can always be added, edited through deletion/recreation, exported and restored correctly.
+- Verified compatibility of Backup & Restore with the updated user pellet system.
+
+### Improved
+- Refined the custom pellet management workflow.
+- Improved overall usability for users working with metric-only pellet scales.
+- Updated interface text and documentation to match the final application behaviour.
+
+### Release Status
+- Final testing completed for all core functionality including:
+  - Built-in pellet database (.177, .22 and .25)
+  - User Pellet management
+  - Saved Rifles
+  - Backup & Restore
+  - Report generation
+  - Documentation
+- ChronoMate v0.9.9 designated as the final release candidate prior to the official **v1.0.0** release.
+
+---
+
+## [v0.9.8] - Documentation Update
+
+### Added
+- Completed the ChronoMate documentation ready for the v1.0.0 release.
+- Added comprehensive user documentation covering installation, operation, backup and restore, frequently asked questions and version history.
+- Added dedicated documentation screenshots for the main application window, ammunition selection, rifle management, backup and restore, and report generation.
+- Organised all documentation images within the `/docs/images` folder.
+
+### Improved
+- Refined wording and formatting throughout all documentation for consistency and readability.
+- Added cross-references between documentation sections where appropriate.
+- Updated documentation to reflect .177, .22 and .25 calibre support.
+- Simplified documentation by linking to screenshots rather than embedding large images directly into the guides.
+
+### Changed
+- Documentation now accurately reflects the final ChronoMate workflow and user interface prior to the v1.0.0 release.
 
 ---
 
