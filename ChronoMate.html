@@ -308,11 +308,24 @@
 
             </label>
 
-            <input
-                id="customWeight"
-                type="number"
-                step="0.01"
-                placeholder="Leave blank to use selected ammo">
+            <div class="weight-input-row">
+
+                <input
+                    id="customWeight"
+                    type="number"
+                    step="0.01"
+                    placeholder="Leave blank to use selected ammo">
+
+                <select
+                    id="customWeightUnit"
+                    aria-label="Custom weight unit">
+
+                    <option value="grains">grains</option>
+                    <option value="grams">grams</option>
+
+                </select>
+
+            </div>
 
 
             <div class="user-ammo-panel" id="userAmmoPanel">
@@ -338,22 +351,47 @@
                     placeholder="e.g. Exact Custom Batch">
 
                 <label for="userAmmoWeight">
-                    Weight (grains)
+                    Weight
                 </label>
 
-                <input
-                    id="userAmmoWeight"
-                    type="number"
-                    step="0.01"
-                    placeholder="e.g. 15.89">
+                <div class="weight-input-row">
 
-                <button
-                    id="btnSaveUserAmmo"
-                    class="utility-button">
+                    <input
+                        id="userAmmoWeight"
+                        type="number"
+                        step="0.01"
+                        placeholder="e.g. 15.89">
 
-                    Add User Pellet
+                    <select
+                        id="userAmmoWeightUnit"
+                        aria-label="User pellet weight unit">
 
-                </button>
+                        <option value="grains">grains</option>
+                        <option value="grams">grams</option>
+
+                    </select>
+
+                </div>
+
+                <div class="user-ammo-buttons">
+
+                    <button
+                        id="btnSaveUserAmmo"
+                        class="utility-button">
+
+                        Add User Pellet
+
+                    </button>
+
+                    <button
+                        id="btnDeleteUserAmmo"
+                        class="utility-button danger-utility">
+
+                        Delete Selected User Pellet
+
+                    </button>
+
+                </div>
 
             </div>
 
@@ -609,7 +647,7 @@
 
     <footer>
 
-        Version 0.9.7
+        Version 0.9.9
 
         <br><br>
 
