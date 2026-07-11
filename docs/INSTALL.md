@@ -123,3 +123,5 @@ See the User Guide for information on recording sessions, generating reports and
 ↑ [Project README](../README.md)
 
 → [User Guide](USERGUIDE.md)
+
+Doc Version 1.0.0
