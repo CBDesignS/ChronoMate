@@ -34,7 +34,7 @@ New functionality will only be considered where it directly improves the recordi
 
 ---
 
-## [v0.9.9] - Final Release Candidate
+## Version 0.9.9 - Final Release Candidate
 
 ### Added
 - Added support for entering custom pellet weights in either **grains** or **grams**.
@@ -64,7 +64,7 @@ New functionality will only be considered where it directly improves the recordi
 
 ---
 
-## [v0.9.8] - Documentation Update
+## Version 0.9.8 - Documentation Update
 
 ### Added
 - Completed the ChronoMate documentation ready for the v1.0.0 release.
