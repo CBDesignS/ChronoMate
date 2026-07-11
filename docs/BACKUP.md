@@ -94,3 +94,6 @@ If a backup cannot be imported:
 ↑ [Project README](../README.md)
 
 → [Frequently Asked Questions](FAQ.md)
+
+
+Doc version 1.0.0
