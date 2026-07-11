@@ -2,7 +2,7 @@
 
 <img src="assets/logo.png" alt="ChronoMate 2026 Logo" width="600">
 
-# ChronoMate 2026
+# ChronoMate 2026 Version 1.0.0
 
 ### Lightweight, offline chronograph recording software for air rifles.
 
