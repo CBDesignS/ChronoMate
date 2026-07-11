@@ -174,3 +174,5 @@ See:
 ↑ [Project README](../README.md)
 
 → [Changelog](CHANGELOG.md)
+
+Doc Version 1.0.0
