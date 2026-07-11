@@ -180,3 +180,5 @@ Most startup issues are caused by incomplete extraction of the release ZIP archi
 ↑ [Project README](../README.md)
 
 → [Backup & Restore](BACKUP.md)
+
+Doc Version 1.0.0
