@@ -44,6 +44,7 @@ const userAmmoNameInput         = document.getElementById("userAmmoName");
 const userAmmoWeightInput       = document.getElementById("userAmmoWeight");
 const userAmmoWeightUnit        = document.getElementById("userAmmoWeightUnit");
 const saveUserAmmoButton        = document.getElementById("btnSaveUserAmmo");
+const deleteUserAmmoButton      = document.getElementById("btnDeleteUserAmmo");
 const userAmmoPanel             = document.getElementById("userAmmoPanel");
 
 const savedRifleSelect          = document.getElementById("savedRifleSelect");
@@ -158,6 +159,32 @@ function getAmmoListForSelectedManufacturer()
 }
 
 
+function convertWeightInputOnUnitChange(input, unitSelect)
+{
+    if(!input || !unitSelect)
+        return;
+
+    const previousUnit =
+        unitSelect.dataset.previousUnit || "grains";
+
+    const selectedUnit =
+        unitSelect.value;
+
+    const currentValue =
+        parseFloat(input.value);
+
+    if(!isNaN(currentValue) && currentValue > 0 && previousUnit !== selectedUnit)
+    {
+        input.value =
+            selectedUnit === "grams"
+                ? grainsToGrams(currentValue).toFixed(3)
+                : gramsToGrains(currentValue).toFixed(2);
+    }
+
+    unitSelect.dataset.previousUnit = selectedUnit;
+}
+
+
 function saveUserAmmoFromForm()
 {
     const manufacturer =
@@ -212,6 +239,63 @@ function saveUserAmmoFromForm()
 }
 
 
+
+
+function deleteSelectedUserAmmo()
+{
+    if(manufacturerSelect.value !== "User Ammo")
+    {
+        alert("Select User Ammo first.");
+        return;
+    }
+
+    const ammoList =
+        getUserAmmoForCurrentCalibre();
+
+    const selectedAmmo =
+        ammoList[ammoSelect.selectedIndex];
+
+    if(!selectedAmmo)
+    {
+        alert("There is no selected User Pellet to delete.");
+        return;
+    }
+
+    const confirmed = confirm(
+        "Delete selected User Pellet?\n\n" +
+        `${selectedAmmo.manufacturer} - ${selectedAmmo.name} ` +
+        `(${selectedAmmo.grains.toFixed(2)} gr)`
+    );
+
+    if(!confirmed)
+        return;
+
+    userAmmo =
+        userAmmo.filter(item => item.id !== selectedAmmo.id);
+
+    saveUserAmmo();
+
+    buildManufacturerList();
+    manufacturerSelect.value = "User Ammo";
+    buildAmmoList();
+
+    const remainingAmmo =
+        getUserAmmoForCurrentCalibre();
+
+    if(remainingAmmo.length > 0)
+    {
+        ammoSelect.selectedIndex =
+            Math.min(ammoSelect.selectedIndex, remainingAmmo.length - 1);
+
+        updateSelectedAmmo();
+    }
+    else
+    {
+        grainsDisplay.textContent = "0.00";
+        gramsDisplay.textContent = "0.000";
+        calculateEnergy();
+    }
+}
 
 
 function updateUserAmmoPanelVisibility()
@@ -568,9 +652,35 @@ customWeightInput.addEventListener(
 
 if(customWeightUnit)
 {
+    customWeightUnit.dataset.previousUnit = customWeightUnit.value;
+
     customWeightUnit.addEventListener(
         "change",
-        calculateEnergy
+        function()
+        {
+            convertWeightInputOnUnitChange(
+                customWeightInput,
+                customWeightUnit
+            );
+
+            calculateEnergy();
+        }
+    );
+}
+
+if(userAmmoWeightUnit)
+{
+    userAmmoWeightUnit.dataset.previousUnit = userAmmoWeightUnit.value;
+
+    userAmmoWeightUnit.addEventListener(
+        "change",
+        function()
+        {
+            convertWeightInputOnUnitChange(
+                userAmmoWeightInput,
+                userAmmoWeightUnit
+            );
+        }
     );
 }
 
@@ -580,6 +690,14 @@ if(saveUserAmmoButton)
     saveUserAmmoButton.addEventListener(
         "click",
         saveUserAmmoFromForm
+    );
+}
+
+if(deleteUserAmmoButton)
+{
+    deleteUserAmmoButton.addEventListener(
+        "click",
+        deleteSelectedUserAmmo
     );
 }
 
