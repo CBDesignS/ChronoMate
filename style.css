@@ -1,7 +1,7 @@
 /*
 ============================================================
  ChronoMate 2026
- Version : v0.9.0 UI Refresh
+ Version : v0.9.9
  Author  : Chris Bruce (CBDesignS)
 ============================================================
 */
@@ -506,3 +506,25 @@ footer{
     color: var(--green);
 }
 
+
+
+/* ==========================================================
+   Weight Unit Selectors
+========================================================== */
+
+.weight-input-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px;
+    gap: 10px;
+    align-items: center;
+}
+
+.weight-input-row select {
+    width: 100%;
+}
+
+@media(max-width:480px){
+    .weight-input-row {
+        grid-template-columns: 1fr;
+    }
+}

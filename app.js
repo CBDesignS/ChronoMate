@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.9.7
+ Version : v0.9.9
 
  Author:
  Chris Bruce (CBDesignS)
@@ -37,10 +37,12 @@ const manufacturerSelect = document.getElementById("manufacturer");
 const ammoSelect         = document.getElementById("ammo");
 
 const customWeightInput  = document.getElementById("customWeight");
+const customWeightUnit   = document.getElementById("customWeightUnit");
 
 const userAmmoManufacturerInput = document.getElementById("userAmmoManufacturer");
 const userAmmoNameInput         = document.getElementById("userAmmoName");
 const userAmmoWeightInput       = document.getElementById("userAmmoWeight");
+const userAmmoWeightUnit        = document.getElementById("userAmmoWeightUnit");
 const saveUserAmmoButton        = document.getElementById("btnSaveUserAmmo");
 const userAmmoPanel             = document.getElementById("userAmmoPanel");
 
@@ -82,6 +84,12 @@ const addShotButton      = document.getElementById("btnAddShot");
 function grainsToGrams(grains)
 {
     return grains * 0.06479891;
+}
+
+
+function gramsToGrains(grams)
+{
+    return grams / 0.06479891;
 }
 
 
@@ -158,8 +166,13 @@ function saveUserAmmoFromForm()
     const name =
         userAmmoNameInput?.value.trim() || "";
 
-    const grains =
+    const enteredWeight =
         parseFloat(userAmmoWeightInput?.value);
+
+    const grains =
+        userAmmoWeightUnit?.value === "grams"
+            ? gramsToGrains(enteredWeight)
+            : enteredWeight;
 
     if(!manufacturer || !name || isNaN(grains) || grains <= 0)
     {
@@ -510,7 +523,11 @@ function getCurrentWeight()
         parseFloat(customWeightInput.value);
 
     if (!isNaN(custom) && custom > 0)
-        return custom;
+    {
+        return customWeightUnit?.value === "grams"
+            ? gramsToGrains(custom)
+            : custom;
+    }
 
     const ammoList =
         getAmmoListForSelectedManufacturer();
@@ -548,6 +565,14 @@ customWeightInput.addEventListener(
     "input",
     calculateEnergy
 );
+
+if(customWeightUnit)
+{
+    customWeightUnit.addEventListener(
+        "change",
+        calculateEnergy
+    );
+}
 
 
 if(saveUserAmmoButton)
