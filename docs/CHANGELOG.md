@@ -379,3 +379,6 @@ The project has always focused on recording and reporting chronograph sessions w
 ← [Frequently Asked Questions](FAQ.md)
 
 ↑ [Project README](../README.md)
+
+
+Doc Version 1.0.0
