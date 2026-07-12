@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v0.9.7
+ Version : v1.1.0
 
  Built-in Ammo Database
 
@@ -14,6 +14,10 @@
 ============================================================
 */
 
+
+// Optional pellet head size may be added to any entry as:
+// headSize: 5.52
+// Entries without a verified head size should omit the property.
 
 //============================================================
 // .177
