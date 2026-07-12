@@ -95,7 +95,9 @@ const ammo22 = [
     { manufacturer: "Air Arms", name: "Diabolo Field Express", grains: 14.66 },
     { manufacturer: "Air Arms", name: "Diabolo Field Heavy", grains: 18.00 },
 
+    { manufacturer: "BSA", name: "Fury", grains: 18.50, headSize: "5.50" },
     { manufacturer: "BSA", name: "Gold Star", grains: 15.89 },
+    { manufacturer: "BSA", name: "Gold Star", grains: 14.66, headSize: "5.53" },
     { manufacturer: "BSA", name: "Interceptor", grains: 14.66 },
 
     { manufacturer: "Bisley", name: "Magnum", grains: 21.14 },
