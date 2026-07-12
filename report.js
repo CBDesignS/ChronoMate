@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version v1.0.0
+ Version v1.1.0
  Report Window Module
 
 ============================================================
@@ -319,6 +319,9 @@ function openReportWindow(report) {
                             <div><strong>Manufacturer:</strong> ${safe(report.ammo?.manufacturer)}</div>
                             <div><strong>Pellet:</strong> ${safe(report.ammo?.name)}</div>
                             <div><strong>Weight:</strong> ${report.ammo ? report.ammo.grains.toFixed(2) + " gr" : "Not entered"}</div>
+                            ${report.ammo?.headSize
+                                ? `<div><strong>Head Size:</strong> ${Number(report.ammo.headSize).toFixed(2)} mm</div>`
+                                : ""}
                         </div>
                     </div>
 
