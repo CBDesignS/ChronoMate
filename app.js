@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v1.0.0
+ Version : v1.1.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -43,6 +43,7 @@ const userAmmoManufacturerInput = document.getElementById("userAmmoManufacturer"
 const userAmmoNameInput         = document.getElementById("userAmmoName");
 const userAmmoWeightInput       = document.getElementById("userAmmoWeight");
 const userAmmoWeightUnit        = document.getElementById("userAmmoWeightUnit");
+const userAmmoHeadSizeInput    = document.getElementById("userAmmoHeadSize");
 const saveUserAmmoButton        = document.getElementById("btnSaveUserAmmo");
 const deleteUserAmmoButton      = document.getElementById("btnDeleteUserAmmo");
 const userAmmoPanel             = document.getElementById("userAmmoPanel");
@@ -62,6 +63,7 @@ const powerMode          = document.getElementById("powerMode");
 
 const grainsDisplay      = document.getElementById("weightGrains");
 const gramsDisplay       = document.getElementById("weightGrams");
+const headSizeDisplay    = document.getElementById("headSizeDisplay");
 
 const energyFTLB         = document.getElementById("energyFTLB");
 const energyJoules       = document.getElementById("energyJoules");
@@ -201,6 +203,14 @@ function saveUserAmmoFromForm()
             ? gramsToGrains(enteredWeight)
             : enteredWeight;
 
+    const enteredHeadSize =
+        parseFloat(userAmmoHeadSizeInput?.value);
+
+    const headSize =
+        !isNaN(enteredHeadSize) && enteredHeadSize > 0
+            ? enteredHeadSize
+            : null;
+
     if(!manufacturer || !name || isNaN(grains) || grains <= 0)
     {
         alert("Please enter manufacturer, pellet name, and a valid weight.");
@@ -212,7 +222,8 @@ function saveUserAmmoFromForm()
         calibre: calibreSelect.value,
         manufacturer: manufacturer,
         name: name,
-        grains: grains
+        grains: grains,
+        headSize: headSize
     };
 
     userAmmo.push(newAmmo);
@@ -226,6 +237,9 @@ function saveUserAmmoFromForm()
 
     if(userAmmoWeightInput)
         userAmmoWeightInput.value = "";
+
+    if(userAmmoHeadSizeInput)
+        userAmmoHeadSizeInput.value = "";
 
     buildManufacturerList();
 
@@ -264,7 +278,8 @@ function deleteSelectedUserAmmo()
     const confirmed = confirm(
         "Delete selected User Pellet?\n\n" +
         `${selectedAmmo.manufacturer} - ${selectedAmmo.name} ` +
-        `(${selectedAmmo.grains.toFixed(2)} gr)`
+        `(${selectedAmmo.grains.toFixed(2)} gr` +
+        `${selectedAmmo.headSize ? `, ${Number(selectedAmmo.headSize).toFixed(2)} mm` : ""})`
     );
 
     if(!confirmed)
@@ -293,6 +308,10 @@ function deleteSelectedUserAmmo()
     {
         grainsDisplay.textContent = "0.00";
         gramsDisplay.textContent = "0.000";
+
+        if(headSizeDisplay)
+            headSizeDisplay.textContent = "Not specified";
+
         calculateEnergy();
     }
 }
@@ -554,15 +573,20 @@ function buildAmmoList()
 
         option.value = index;
 
+        const headSizeText =
+            ammo.headSize
+                ? `, ${Number(ammo.headSize).toFixed(2)} mm`
+                : "";
+
         if(manufacturerSelect.value === "User Ammo")
         {
             option.textContent =
-                `${ammo.manufacturer} - ${ammo.name} (${ammo.grains.toFixed(2)} gr)`;
+                `${ammo.manufacturer} - ${ammo.name} (${ammo.grains.toFixed(2)} gr${headSizeText})`;
         }
         else
         {
             option.textContent =
-                `${ammo.name} (${ammo.grains.toFixed(2)} gr)`;
+                `${ammo.name} (${ammo.grains.toFixed(2)} gr${headSizeText})`;
         }
 
         ammoSelect.appendChild(option);
@@ -592,6 +616,14 @@ function updateSelectedAmmo()
 
     gramsDisplay.textContent =
         grainsToGrams(selectedAmmo.grains).toFixed(3);
+
+    if(headSizeDisplay)
+    {
+        headSizeDisplay.textContent =
+            selectedAmmo.headSize
+                ? `${Number(selectedAmmo.headSize).toFixed(2)} mm`
+                : "Not specified";
+    }
 
     calculateEnergy();
 }
@@ -1078,7 +1110,8 @@ function getSelectedAmmoForReport()
         manufacturer : selectedAmmo.manufacturer,
         name : selectedAmmo.name,
         grains : selectedAmmo.grains,
-        grams : grainsToGrams(selectedAmmo.grains)
+        grams : grainsToGrams(selectedAmmo.grains),
+        headSize : selectedAmmo.headSize || null
     };
 }
 
