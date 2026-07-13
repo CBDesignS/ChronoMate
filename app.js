@@ -963,6 +963,19 @@ function addShot()
     if (result.fps <= 0)
         return;
 
+    if (shotHistory.length === 0)
+    {
+        if(typeof saveFormToSession === "function")
+        {
+            saveFormToSession();
+        }
+
+        if(typeof refreshSessionTimestamp === "function")
+        {
+            refreshSessionTimestamp();
+        }
+    }
+
     shotHistory.push(result);
 
     const row = document.createElement("tr");

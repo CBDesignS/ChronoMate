@@ -14,7 +14,7 @@ const STORAGE_KEYS = {
     SESSION : "ChronoMateSession"
 };
 
-const CHRONOMATE_VERSION = "0.9.0";
+const CHRONOMATE_VERSION = "1.1.0";
 
 let chronoSession = {
     tester : "",
@@ -36,6 +36,13 @@ function createSessionTimestamp()
     const now = new Date();
     chronoSession.sessionDate = now.toLocaleDateString();
     chronoSession.sessionTime = now.toLocaleTimeString();
+}
+
+
+function refreshSessionTimestamp()
+{
+    createSessionTimestamp();
+    saveSession();
 }
 
 function saveSession()
