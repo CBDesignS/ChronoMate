@@ -149,6 +149,10 @@ function openReportWindow(report) {
                     gap: 7px 18px;
                 }
 
+                .session-notes {
+                    margin-top: 7px;
+                }
+
                 .stacked-info {
                     display: grid;
                     grid-template-columns: 1fr;
@@ -299,6 +303,9 @@ function openReportWindow(report) {
                             <div><strong>Chronograph:</strong> ${safe(report.session.chronograph)}</div>
                             <div><strong>Date:</strong> ${safe(report.session.sessionDate)}</div>
                             <div><strong>Time:</strong> ${safe(report.session.sessionTime)}</div>
+                        </div>
+                        <div class="session-notes">
+                            <strong>Notes:</strong> ${safe(report.session.notes)}
                         </div>
                     </div>
 
