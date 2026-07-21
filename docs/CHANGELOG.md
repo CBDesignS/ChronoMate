@@ -10,6 +10,50 @@ Subsequent releases focused on documentation, project polish and long-term maint
 
 ---
 
+## v1.2.0 – Sub-12 Report Warnings
+
+### Added
+
+- Added colour-coded shot warnings to generated reports when **Sub-12 ft-lb** mode is selected.
+- Shots from **11.70 to 11.99 ft-lb** are highlighted with a pastel orange warning tint.
+- Shots at **12.00 ft-lb or above** are highlighted with a pastel red warning tint.
+
+### Improved
+
+- Warning colours are applied to the complete shot row for clearer identification.
+- Added print colour handling so warning highlights remain visible when reports are printed or saved as PDF.
+- FAC reports remain unchanged and do not display Sub-12 warning colours.
+- Updated active application and report version references to **v1.2.0**.
+
+---
+
+## v1.1.1 – Report Fixes
+
+### Fixed
+
+- Added Session Notes to generated reports.
+- Fixed the session date and time so a fresh timestamp is recorded when the first shot of a new shot string is entered.
+- Corrected the software version shown in report metadata and the report footer.
+
+---
+
+## v1.1.0 – Pellet Data Improvements
+
+### Added
+
+- Added optional pellet head-size recording for user pellets and reports.
+- Added support for entering user pellet weights in either grains or grams.
+- Added automatic conversion when switching between grains and grams during pellet entry.
+- Added the ability to delete saved user pellets with confirmation.
+- Added new verified BSA pellet entries to the built-in ammunition database.
+
+### Improved
+
+- Kept the **User Ammo** manufacturer option permanently available so the first custom pellet can always be created.
+- Preserved compatibility with existing backups and previously saved user data.
+
+---
+
 ## v1.0.0 – Stable Release
 
 ### Completed

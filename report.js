@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version v1.1.1
+ Version v1.2.0
  Report Window Module
 
 ============================================================
@@ -25,14 +25,33 @@ function openReportWindow(report) {
         muted: isDarkReport ? "#9ca3af" : "#555555"
     };
 
-    const shotRows = report.shots.map((shot, index) => `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${shot.fps.toFixed(1)}</td>
-            <td>${shot.ftlb.toFixed(2)}</td>
-            <td>${shot.joules.toFixed(2)}</td>
-        </tr>
-    `).join("");
+    const isSub12Report =
+        report.statistics?.selectedLimit === "Sub-12 ft-lb";
+
+    const shotRows = report.shots.map((shot, index) => {
+        let warningClass = "";
+
+        if (isSub12Report)
+        {
+            if (shot.ftlb >= 12)
+            {
+                warningClass = "shot-over-limit";
+            }
+            else if (shot.ftlb >= 11.7)
+            {
+                warningClass = "shot-near-limit";
+            }
+        }
+
+        return `
+            <tr class="${warningClass}">
+                <td>${index + 1}</td>
+                <td>${shot.fps.toFixed(1)}</td>
+                <td>${shot.ftlb.toFixed(2)}</td>
+                <td>${shot.joules.toFixed(2)}</td>
+            </tr>
+        `;
+    }).join("");
 
     const reportWindow = window.open("", "ChronoMateReport");
 
@@ -181,6 +200,16 @@ function openReportWindow(report) {
                     background: ${reportTheme.tableHeader};
                 }
 
+                .shot-near-limit td {
+                    background: #ffe4b5;
+                    color: #111111;
+                }
+
+                .shot-over-limit td {
+                    background: #f8caca;
+                    color: #111111;
+                }
+
                 footer {
                     margin-top: 18px;
                     padding-top: 10px;
@@ -206,6 +235,8 @@ function openReportWindow(report) {
                         color: black !important;
                         margin: 0;
                         font-size: 12.5px;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
                     }
 
                     .report-header {
