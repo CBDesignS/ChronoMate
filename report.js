@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version v1.2.0
+ Version v1.3.0
  Report Window Module
 
 ============================================================
@@ -53,12 +53,11 @@ function openReportWindow(report) {
         `;
     }).join("");
 
-    const reportWindow = window.open("", "ChronoMateReport");
-
-    reportWindow.document.write(`
+    const reportHtml = `
         <!DOCTYPE html>
         <html>
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>ChronoMate Report</title>
             <style>
                 body {
@@ -219,6 +218,72 @@ function openReportWindow(report) {
                     text-align: center;
                 }
 
+                @media screen and (max-width: 760px) {
+                    body {
+                        margin: 14px;
+                    }
+
+                    .report-toolbar {
+                        position: static;
+                        margin-bottom: 14px;
+                    }
+
+                    .print-note {
+                        display: none;
+                    }
+
+                    .report-header img {
+                        width: 74px;
+                    }
+
+                    h1 {
+                        font-size: 1.75rem;
+                    }
+
+                    .report-layout {
+                        grid-template-columns: 1fr;
+                        gap: 14px;
+                    }
+
+                    .report-panel {
+                        min-width: 0;
+                        padding: 12px;
+                    }
+
+                    .info-grid,
+                    .stats-grid {
+                        grid-template-columns: 1fr 1fr;
+                        gap: 7px 12px;
+                    }
+
+                    table {
+                        font-size: .92rem;
+                    }
+
+                    th, td {
+                        padding: 7px 5px;
+                    }
+                }
+
+                @media screen and (max-width: 430px) {
+                    body {
+                        margin: 10px;
+                    }
+
+                    .report-toolbar button {
+                        width: 100%;
+                    }
+
+                    .info-grid,
+                    .stats-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    h2 {
+                        font-size: 1.15rem;
+                    }
+                }
+
                 @media print {
 
                     @page {
@@ -230,13 +295,51 @@ function openReportWindow(report) {
                         display: none;
                     }
 
+                    html,
                     body {
-                        background: white !important;
-                        color: black !important;
+                        background: #ffffff !important;
+                        color: #111111 !important;
                         margin: 0;
                         font-size: 12.5px;
                         -webkit-print-color-adjust: exact;
                         print-color-adjust: exact;
+                    }
+
+                    .report-panel {
+                        background: #ffffff !important;
+                        color: #111111 !important;
+                        border-color: #8bc53f !important;
+                    }
+
+                    .report-panel *,
+                    .report-header,
+                    .report-header *,
+                    table,
+                    tbody,
+                    tr,
+                    td {
+                        color: #111111 !important;
+                    }
+
+                    th {
+                        background: #f3f4f6 !important;
+                        color: #111111 !important;
+                        border-color: #cccccc !important;
+                    }
+
+                    td {
+                        background: #ffffff !important;
+                        border-color: #cccccc !important;
+                    }
+
+                    .shot-near-limit td {
+                        background: #ffe4b5 !important;
+                        color: #111111 !important;
+                    }
+
+                    .shot-over-limit td {
+                        background: #f8caca !important;
+                        color: #111111 !important;
                     }
 
                     .report-header {
@@ -306,13 +409,36 @@ function openReportWindow(report) {
                         padding-top: 6px;
                         font-size: 9px;
                     }
+
+                    body.android-report footer {
+                        display: none !important;
+                    }
                 }
             </style>
         </head>
         <body>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    if (window.AndroidReportBridge &&
+                        typeof window.AndroidReportBridge.printReport === "function") {
+                        document.body.classList.add("android-report");
+                    }
+                });
+
+                function printChronoMateReport() {
+                    if (window.AndroidReportBridge &&
+                        typeof window.AndroidReportBridge.printReport === "function") {
+                        window.AndroidReportBridge.printReport();
+                        return;
+                    }
+
+                    window.print();
+                }
+            </script>
+
             <div class="report-toolbar">
                 <div class="print-note">Best printed in A4 landscape</div>
-                <button onclick="window.print()">🖨 Print Report</button>
+                <button onclick="printChronoMateReport()">🖨 Print Report</button>
             </div>
 
             <div class="report-header">
@@ -403,7 +529,22 @@ function openReportWindow(report) {
             </footer>
         </body>
         </html>
-    `);
+    `;
 
+    // FireTab Android wrapper: open the report in a dedicated native WebView.
+    if (window.AndroidBridge && typeof window.AndroidBridge.openReport === "function") {
+        window.AndroidBridge.openReport(reportHtml);
+        return;
+    }
+
+    // Desktop browser fallback.
+    const reportWindow = window.open("", "ChronoMateReport");
+
+    if (!reportWindow) {
+        alert("The report window could not be opened.");
+        return;
+    }
+
+    reportWindow.document.write(reportHtml);
     reportWindow.document.close();
 }

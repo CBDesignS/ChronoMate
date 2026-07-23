@@ -10,6 +10,17 @@ Subsequent releases focused on documentation, project polish and long-term maint
 
 ---
 
+## v1.3.0 – Shared Desktop and Android Codebase
+
+- Aligned the desktop program files with the Android-compatible shared codebase.
+- Added mobile-friendly shot-entry form handling and Android keyboard support while retaining normal desktop browser behaviour.
+- Added guarded Android bridges for report display, printing, backup export/import, and notifications.
+- Added responsive tablet and phone layouts to the main interface and generated reports.
+- Improved printed report colour consistency, including Sub-12 warning highlights.
+- Preserved the report footer in desktop printing while hiding it only in the Android print WebView.
+- Refreshed the shot counter correctly after clearing a shot string.
+- Updated active application, report, data, and documentation version references to **v1.3.0**.
+
 ## v1.2.0 – Sub-12 Report Warnings
 
 ### Added
