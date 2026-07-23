@@ -2,7 +2,7 @@
 ============================================================
 
  ChronoMate 2026
- Version : v1.2.0
+ Version : v1.3.0
 
  Author:
  Chris Bruce (CBDesignS)
@@ -54,6 +54,7 @@ const loadRifleButton           = document.getElementById("btnLoadRifle");
 const deleteRifleButton         = document.getElementById("btnDeleteRifle");
 
 const velocityInput      = document.getElementById("velocity");
+const shotEntryForm      = document.getElementById("shotEntryForm");
 const shotTargetSelect   = document.getElementById("shotTarget");
 const shotCounter        = document.getElementById("shotCounter");
 const shotCounterBox     = document.getElementById("shotCounterBox");
@@ -213,7 +214,7 @@ function saveUserAmmoFromForm()
 
     if(!manufacturer || !name || isNaN(grains) || grains <= 0)
     {
-        alert("Please enter manufacturer, pellet name, and a valid weight.");
+        showSuccessMessage("Please enter manufacturer, pellet name, and a valid weight.");
         return;
     }
 
@@ -408,6 +409,19 @@ function buildSavedRifleList()
 }
 
 
+function showSuccessMessage(message)
+{
+    if(window.AndroidBridge &&
+       typeof window.AndroidBridge.showToast === "function")
+    {
+        window.AndroidBridge.showToast(message);
+        return;
+    }
+
+    alert(message);
+}
+
+
 function saveCurrentRifle()
 {
     const rifle =
@@ -426,7 +440,7 @@ function saveCurrentRifle()
     if(savedRifleSelect)
         savedRifleSelect.value = rifle.id;
 
-    alert("Rifle saved.");
+    showSuccessMessage("Rifle saved successfully.");
 }
 
 
@@ -762,11 +776,23 @@ velocityInput.addEventListener(
     calculateEnergy
 );
 
+if(shotEntryForm)
+{
+    shotEntryForm.addEventListener(
+        "submit",
+        function(event)
+        {
+            event.preventDefault();
+            addShot();
+        }
+    );
+}
+
 velocityInput.addEventListener(
     "keydown",
     function(event)
     {
-        if (event.key === "Enter")
+        if (event.key === "Enter" || event.keyCode === 13)
         {
             event.preventDefault();
             addShot();
@@ -995,6 +1021,12 @@ function addShot()
 
     velocityInput.value = "";
     velocityInput.focus();
+
+    if(window.AndroidBridge &&
+       typeof window.AndroidBridge.showVelocityKeyboard === "function")
+    {
+        window.AndroidBridge.showVelocityKeyboard();
+    }
 }
 
 
@@ -1275,20 +1307,32 @@ function exportChronoMateBackup()
     const json =
         JSON.stringify(backup, null, 4);
 
+    const timestamp =
+        new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "");
+
+    const filename =
+        `ChronoMate_Backup_${timestamp}.json`;
+
+    // Android WebView uses the system Save As picker. The browser path
+    // below remains unchanged for the desktop version of ChronoMate.
+    if(window.AndroidBridge &&
+       typeof window.AndroidBridge.exportBackup === "function")
+    {
+        window.AndroidBridge.exportBackup(json, filename);
+        return;
+    }
+
     const blob =
         new Blob([json], { type: "application/json" });
 
     const link =
         document.createElement("a");
 
-    const timestamp =
-        new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "");
-
     link.href =
         URL.createObjectURL(blob);
 
     link.download =
-        `ChronoMate_Backup_${timestamp}.json`;
+        filename;
 
     link.click();
 
@@ -1338,7 +1382,7 @@ function importChronoMateBackup(backup)
         saveFormToSession();
     }
 
-    alert("ChronoMate backup imported successfully.");
+    showSuccessMessage("ChronoMate backup imported successfully.");
 }
 
 
@@ -1392,6 +1436,15 @@ if(importBackupButton && backupFileInput)
         "click",
         function()
         {
+            // Android WebView uses the system Open File picker. The hidden
+            // file input remains unchanged for the desktop browser version.
+            if(window.AndroidBridge &&
+               typeof window.AndroidBridge.importBackup === "function")
+            {
+                window.AndroidBridge.importBackup();
+                return;
+            }
+
             backupFileInput.click();
         }
     );
@@ -1429,7 +1482,7 @@ function clearShotHistory()
 {
     if(shotHistory.length===0)
     {
-        alert("There are no shots to clear.");
+        showSuccessMessage("There are no shots to clear.");
         return;
     }
 
@@ -1456,6 +1509,8 @@ function clearShotHistory()
     powerStatus.className = "status safe";
 
     powerBar.style.width = "0%";
+
+    updateShotCounter();
 }
 
 
